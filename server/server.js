@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express()
 const path = require("path")
+const {abi, address} = require('../contractData');
 const PORT = 3333;
 // const db = require('../server/controllers/wishController.js')
 const Web3 = require('web3');
@@ -21,87 +22,13 @@ app.use((req, res, next) => {
   next();
 });
 
-const abi = [
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "DrainWishes",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "wish",
-        "type": "bytes32"
-      }
-    ],
-    "name": "WishMade",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "_wish",
-        "type": "bytes32"
-      }
-    ],
-    "name": "hashWish",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "drainWishes",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
 
 //get access to contract instance
-const contractInstance = new web3.eth.Contract(abi,'0x5b5d0F765Dd32A56969596B3EfEf06150ebeCDc9')
+const contractInstance = new web3.eth.Contract(abi, address)
 
 contractInstance.events.WishMade({})
 .on('data', event => console.log('EVENT EMITTED SERVER', event))
-
-// console.log(contractInstance)
-
-// let eventWish = contractInstance.events.WishMade()
-// eventWish.watch((err, res) => {
-//   if(err){
-//     console.log('Error with retreiving even data', err)
-//   } else {
-//     console.log(res); // event response
-//     //use bcrypt to hash 
-//     // const cryptedWish = bcrypt.hashSync(res, SALT_WORK_FACTOR)
-//     // //store in database to be later called to database
-//     // let newWish = new WishHasher({
-//     //   wish
-//     // });
-//     // newWish.save((err, data) => {
-//     //   if(err) {
-//     //     res.status(400)
-//     //     next(err);
-//     //   }
-//     //   else {
-//     //     console.log('saving wish to be hashed')
-//     //     res.status(200).send(res)
-//     //   }
-//     // })
-//   }    
-//     event.stopWatching() // Stop watching for the event once you've done what you wanted to do.
-// });
-
-// app.use(express.static(path.join(__dirname, '../assets/')));   
+.on('change', event => console.log('EVENT EMITTED SERVER', event))
 
 
 // app.post('/hashWish', db.hashWish, (req, res) => {
