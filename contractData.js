@@ -1,5 +1,5 @@
 module.exports = {
-  abi: [
+  CONTRACT_ABI: [
     {
       "anonymous": false,
       "inputs": [],
@@ -44,5 +44,5 @@ module.exports = {
       "type": "function"
     }
   ],
-  address: '0x5b5d0F765Dd32A56969596B3EfEf06150ebeCDc9'
+  CONTRACT_ADDRESS: '0xf665F60Cc1353d2Abb4aD5Af60AB32ca8c031D58'
 }

@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "create-next-app": "^11.0.1",
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.12",
     "web3": "1"
   }

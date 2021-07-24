@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import Web3 from 'web3';
-import {abi, address} from '../../contractData';
-
+import { CONTRACT_ABI, CONTRACT_ADDRESS, URL  } from '../../contractData';
 const Input = () => {
  
   const [wish, setWish] = useState('');
@@ -10,23 +9,39 @@ const Input = () => {
 
 
 const onSubmit = async (e) => {
-  console.log('here')
- const web3 = new Web3('https://rinkeby.infura.io/v3/aeb481bbd64a4f59a4e3a2d3d6f71c73');
- const contractInstance = new web3.eth.Contract(abi, address);
- console.log(contractInstance)
-  try {
-    await contractInstance.methods.hashWish(wish).send({
+  e.preventDefault();
+  let web3;
+  //getInitialProps migrate once connected
+  //is client connected to provider? if yes...
+
+  // set the provider you want from Web3.providers -- use local ganache
+  web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545')); 
+
+  // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));  
+  const contractInstance = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+
+  const params = web3.utils.asciiToHex(wish).padEnd(66, "0");
+
+  let accounts = await web3.eth.getAccounts();
+
+  await contractInstance.methods.hashWish(params).send({
       from: accounts[0]
-    })
-    console.log('hitting')
-  } catch (error) {
-    setMessage('Error detected')
-  }
-   
+    });
+
+    // await contractInstance.methods.hashWish(wish).send({
+    //   from: accounts[0]
+    // });
+
+    console.log('hitting', accounts[0])
+    
+    const results = await contractInstance.getPastEvents(
+      'WishMade',
+      {}
+    )
+    console.log('results!', results)
+
     setWish('');
   }
-
-
   return (
     <div className='input-form'>
     <InputGroup className="mb-3" id='form' onSubmit={onSubmit}>

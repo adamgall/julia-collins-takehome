@@ -1,19 +1,12 @@
 const express = require("express");
 const app = express()
 const path = require("path")
-const {abi, address} = require('../contractData');
 const PORT = 3333;
 // const db = require('../server/controllers/wishController.js')
 const Web3 = require('web3');
 const HashingWell = require('../build/contracts/HashingWell.json');
-//used VanityEth
-// const address = '0xfa886e33263696589c9857bd59075A4C831FD2C7';
-// const privateKey = '65e755e457e9516cdaf4ebccd29c29056bd984acf1c850928e766b09b69c1d27';
 
-const infuraUrl = 'https://rinkeby.infura.io/v3/aeb481bbd64a4f59a4e3a2d3d6f71c73'
-const web3 = new Web3(infuraUrl);
-
-//contract address: 0x14A66eb65153Cac230826B3b1EBd0568C3ff7Cb4
+require('dotenv').config();
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -22,13 +15,74 @@ app.use((req, res, next) => {
   next();
 });
 
+const wss_key = process.env.RINKEBY_WSS_KEY;
+const contract_address = process.env.CONTRACT_ADDRESS;
+const abi = [
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "DrainWishes",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "wish",
+        "type": "bytes32"
+      }
+    ],
+    "name": "WishMade",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_wish",
+        "type": "bytes32"
+      }
+    ],
+    "name": "hashWish",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "drainWishes",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+//connect with
+// let web3 = new Web3.providers.WebsocketProvider(`wss://127.0.0.1:7545`);
+const options = {
+  // Enable auto reconnection
+  reconnect: {
+      auto: true,
+      delay: 5000, // ms
+      maxAttempts: 30,
+      onTimeout: false
+  }
+};
 
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545', options));  
 //get access to contract instance
-const contractInstance = new web3.eth.Contract(abi, address)
+const contractInstance = new web3.eth.Contract(abi, contract_address)
 
+//use web sockets to enable server to listen for when events are emitted by our contract instance 
 contractInstance.events.WishMade({})
-.on('data', event => console.log('EVENT EMITTED SERVER', event))
-.on('change', event => console.log('EVENT EMITTED SERVER', event))
+.on('data', event => console.log('EVENT EMITTED SERVER-data', event))
+.on('change', event => console.log('EVENT EMITTED SERVER-change', event))
+.on('error', event => console.log('Error with event listerner', event));
 
 
 // app.post('/hashWish', db.hashWish, (req, res) => {
