@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import Web3 from 'web3';
+import axios from 'axios';
 import { CONTRACT_ABI, CONTRACT_ADDRESS, URL  } from '../../contractData';
 const Input = () => {
  
   const [wish, setWish] = useState('');
   const [message, setMessage] = useState('');
-
+  const [wishes, setWishes] = useState([]);
+  
+  useEffect(() => {
+    axios.get('http://localhost:3001/getWishes')
+      .then(results => console.log(results))
+      .then(data => {
+        console.log('all wishes', data)
+      })
+      .catch(err => {
+        console.log('error with fetching', err)
+      })
+  }, [wish])
 
 const onSubmit = async (e) => {
   e.preventDefault();
@@ -55,6 +67,7 @@ const onSubmit = async (e) => {
       onChange={e => setWish(e.target.value)}
     />
   </InputGroup>
+  {wishes}
     </div>
   )
 }

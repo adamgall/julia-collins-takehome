@@ -32,13 +32,14 @@ db = {
         console.log('error with deleteing wishes', e)
       }
   },
-  getAllWishes() {
+  getAllWishes(req, res, next) {
     wishHasher.find((err, data) => {
       if(err) {
         console.log('error', err)
       } else {
         res.locals.wishes = data;
       }
+      next()
     })
   }
 }

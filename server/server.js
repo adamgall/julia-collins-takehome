@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express()
 const path = require("path")
-const PORT = 3333;
+const PORT = 3001;
 // const db = require('../server/controllers/wishController.js')
 const Web3 = require('web3');
 const HashingWell = require('../build/contracts/HashingWell.json');
@@ -10,13 +10,14 @@ const { hashWish, deleteAllWishes, getAllWishes } = require('./db/wishesControll
 require('dotenv').config();
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header("Access-Control-Allow-Headers", "*")
-  res.header("Access-Control-Allow-Methods", "*")
-  next();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Credentials", "true");
+		res.setHeader("Access-Control-Max-Age", "1800");
+		res.setHeader("Access-Control-Allow-Headers", "content-type");
+		res.setHeader("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, PATCH, OPTIONS");
+  next()
 });
 
-const wss_key = process.env.RINKEBY_WSS_KEY;
 const contract_address = process.env.CONTRACT_ADDRESS;
 const abi = [
   {
@@ -99,17 +100,17 @@ app.get('/getWishes', db.getAllWishes, (req, res, next) => {
   res.status(200).send(res.locals.wishes);
 })
 
-// // GLOBAL ERROR HANDLER
-// app.use((err, req, res, next) => {
-//   const defaultErr = {
-//     log: 'Express error handler caught unknown middleware error',
-//     status: 500,
-//     message: { err: 'An error occurred' },
-//   };
-//   const errorObj = Object.assign({}, defaultErr, err);
-//   console.log(errorObj.status, errorObj.message);
-//   return res.status(errorObj.status).send(errorObj.message.err);
-// });
+// GLOBAL ERROR HANDLER
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log(errorObj.status, errorObj.message);
+  return res.status(errorObj.status).send(errorObj.message.err);
+});
 
 // RUN SERVER
 app.listen(PORT, () => {
