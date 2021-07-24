@@ -5,6 +5,7 @@ const PORT = 3333;
 // const db = require('../server/controllers/wishController.js')
 const Web3 = require('web3');
 const HashingWell = require('../build/contracts/HashingWell.json');
+const { hashWish, deleteAllWishes, getAllWishes } = require('./db/wishesController.js');
 
 require('dotenv').config();
 
@@ -62,8 +63,6 @@ const abi = [
     "type": "function"
   }
 ]
-//connect with
-// let web3 = new Web3.providers.WebsocketProvider(`wss://127.0.0.1:7545`);
 const options = {
   // Enable auto reconnection
   reconnect: {
@@ -79,16 +78,26 @@ const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545'
 const contractInstance = new web3.eth.Contract(abi, contract_address)
 
 //use web sockets to enable server to listen for when events are emitted by our contract instance 
+//make call to controller to encrypt string and store in db
+
 contractInstance.events.WishMade({})
-.on('data', event => console.log('EVENT EMITTED SERVER-data', event))
-.on('change', event => console.log('EVENT EMITTED SERVER-change', event))
+.on('data', event => {
+  console.log('EVENT EMITTED SERVER-data', event.returnValues.wish)
+  db.hashWish(event.returnValues.wish);
+
+})
 .on('error', event => console.log('Error with event listerner', event));
 
+contractInstance.events.DrainWishes({})
+.on('data', event => {
+  db.deleteAllWishes()
+})
+.on('error', event => console.log('Error with event listerner', event));
 
-// app.post('/hashWish', db.hashWish, (req, res) => {
-//   console.log('SUCCESS', res.locals.wish)
-//   res.status(200).send(res.locals.wish)
-// })
+app.get('/getWishes', db.getAllWishes, (req, res, next) => {
+  console.log('SUCCESS', res.locals.wishes);
+  res.status(200).send(res.locals.wishes);
+})
 
 // // GLOBAL ERROR HANDLER
 // app.use((err, req, res, next) => {
