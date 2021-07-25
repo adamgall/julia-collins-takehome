@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import Web3 from 'web3';
-import axios from 'axios';
 import { CONTRACT_ABI, CONTRACT_ADDRESS, URL  } from '../../contractData';
-const Input = () => {
+import Stars from './Stars'
+
+const Input = (props) => {
  
   const [wish, setWish] = useState('');
   const [message, setMessage] = useState('');
-  const [wishes, setWishes] = useState([]);
-  
-  useEffect(() => {
-    axios.get('http://localhost:3001/getWishes')
-      .then(results => console.log(results))
-      .then(data => {
-        console.log('all wishes', data)
-      })
-      .catch(err => {
-        console.log('error with fetching', err)
-      })
-  }, [wish])
 
 const onSubmit = async (e) => {
   e.preventDefault();
@@ -31,9 +20,7 @@ const onSubmit = async (e) => {
 
   // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));  
   const contractInstance = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-
   const params = web3.utils.asciiToHex(wish).padEnd(66, "0");
-
   let accounts = await web3.eth.getAccounts();
 
   await contractInstance.methods.hashWish(params).send({
@@ -67,7 +54,7 @@ const onSubmit = async (e) => {
       onChange={e => setWish(e.target.value)}
     />
   </InputGroup>
-  {wishes}
+    <Stars dbData={props.dbData}/>
     </div>
   )
 }
