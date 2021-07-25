@@ -55,7 +55,7 @@ const onSubmit = async (e) => {
     setWish('');
   }
   return (
-    <div className='input-form'>
+    <div id='input-form'>
     <InputGroup className="mb-3" id='form' onSubmit={onSubmit}>
     <Button onClick={onSubmit} variant="outline-secondary" id="button-addon1">
       Button
