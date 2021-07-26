@@ -15,7 +15,6 @@ const onSubmit = async (e) => {
   let web3;
   //getInitialProps migrate once connected
   //is client connected to provider? if yes...
-
   // set the provider you want from Web3.providers -- use local ganache
   web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545')); 
 
@@ -27,20 +26,11 @@ const onSubmit = async (e) => {
   await contractInstance.methods.hashWish(params).send({
       from: accounts[0]
     });
-
-    // await contractInstance.methods.hashWish(wish).send({
-    //   from: accounts[0]
-    // });
-
-    console.log('hitting', accounts[0])
-    
     const results = await contractInstance.getPastEvents(
       'WishMade',
       {}
     )
-    console.log('results!', results)
     setWish('');
-
     //setTimeout and reroute to index.js so getInitialProps can update state of stars
     setTimeout(()=> {
       Router.push({

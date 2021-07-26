@@ -4,7 +4,7 @@ exports.id = 405;
 exports.ids = [405];
 exports.modules = {
 
-/***/ 27:
+/***/ 695:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29,6 +29,42 @@ var next_image = __webpack_require__(675);
 /* harmony default export */ var starr = ({"src":"/_next/static/image/public/starr.e182fd7442630843d8ce881b2dc241a0.png","height":294,"width":300,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA2UlEQVR42mMAgZ+Xw5lB9K/zIYq/LoTxgti/T3kwMqCD36ftj/y8Gp6MIvjzSrTwx3ct4r/PesT8OWH8/+fV0Kv/d3Fr/dsnL/XrYggnUJdz9u+zLv9/XfT+//uM/V8g/v/npOn/X+c97/+4miDLAAL/DsrX/zlpDhR0+f77tM3fn1eC3n2/m2YMt+bzi1rJn5cD/v85ZQlU5Pr/30G57SDxP6d0WSDuuBYZ/ueU1d+/h7XKftyIWv37jNPL/9uFuRCuP+Op++eYlSrc4Vej7H6f8eBnYGBgAAAtV3EqqsqM7QAAAABJRU5ErkJggg=="});
 ;// CONCATENATED MODULE: external "next/dynamic"
 var dynamic_namespaceObject = require("next/dynamic");;
+;// CONCATENATED MODULE: external "react-bootstrap"
+var external_react_bootstrap_namespaceObject = require("react-bootstrap");;
+;// CONCATENATED MODULE: ./components/ModalData.js
+
+
+
+
+
+const ModalData = props => {
+  function onClick() {
+    props.setShowData(false);
+  }
+
+  return /*#__PURE__*/jsx_runtime_.jsx("div", {
+    id: "modal",
+    children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.Modal.Dialog, {
+      children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Header, {
+        children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Title, {
+          children: "Your Wish, Immemorialized In The Stars"
+        })
+      }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Body, {
+        children: /*#__PURE__*/(0,jsx_runtime_.jsxs)("p", {
+          children: [props.starData._id, " - Star Speak"]
+        })
+      }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Footer, {
+        children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Button, {
+          onClick: () => onClick(),
+          variant: "secondary",
+          children: "Close"
+        })
+      })]
+    })
+  });
+};
+
+/* harmony default export */ var components_ModalData = (ModalData);
 ;// CONCATENATED MODULE: ./components/Stars.js
 
 
@@ -36,9 +72,21 @@ var dynamic_namespaceObject = require("next/dynamic");;
 
 
 
+
+
 const Stars = props => {
+  const {
+    0: starData,
+    1: setData
+  } = (0,external_react_.useState)('');
+  const {
+    0: showData,
+    1: setShowData
+  } = (0,external_react_.useState)(false);
+
   function onClick(starData) {
-    console.log('starData', starData);
+    setData(starData);
+    setShowData(true);
   }
 
   const starArr = [];
@@ -53,15 +101,16 @@ const Stars = props => {
     }));
   }
 
-  return /*#__PURE__*/jsx_runtime_.jsx("div", {
+  return /*#__PURE__*/(0,jsx_runtime_.jsxs)("div", {
     className: "star-container",
-    children: starArr
+    children: [starArr, showData ? /*#__PURE__*/jsx_runtime_.jsx(components_ModalData, {
+      setShowData: setShowData,
+      starData: starData
+    }) : '']
   });
 };
 
 /* harmony default export */ var components_Stars = (Stars);
-;// CONCATENATED MODULE: external "react-bootstrap"
-var external_react_bootstrap_namespaceObject = require("react-bootstrap");;
 ;// CONCATENATED MODULE: external "web3"
 var external_web3_namespaceObject = require("web3");;
 var external_web3_default = /*#__PURE__*/__webpack_require__.n(external_web3_namespaceObject);
@@ -103,13 +152,8 @@ const Input = props => {
     let accounts = await web3.eth.getAccounts();
     await contractInstance.methods.hashWish(params).send({
       from: accounts[0]
-    }); // await contractInstance.methods.hashWish(wish).send({
-    //   from: accounts[0]
-    // });
-
-    console.log('hitting', accounts[0]);
+    });
     const results = await contractInstance.getPastEvents('WishMade', {});
-    console.log('results!', results);
     setWish(''); //setTimeout and reroute to index.js so getInitialProps can update state of stars
 
     setTimeout(() => {
@@ -300,7 +344,7 @@ module.exports = require("react/jsx-runtime");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(27); });
+var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(695); });
 module.exports = __webpack_exports__;
 
 })();
