@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import Head from 'next/head';
-import Intro from '../components/Intro';
+import Stars from '../components/Stars';
 import Input from '../components/Input';
 import axios from 'axios';
 
@@ -18,6 +18,7 @@ class Home extends Component {
       return { dbData };
     }
   render() { 
+ 
     return ( 
       <div>
       <Head>
@@ -29,8 +30,8 @@ class Home extends Component {
         crossOrigin="anonymous"
       />
       </Head>
-        <Intro/>
-        <Input dbData={ this.props.dbData }/> 
+      <Stars dbData={this.props.dbData}/>
+        <Input /> 
           <div class="stars"></div>
           <div class="twinkling"></div>
           <div class="clouds"></div>

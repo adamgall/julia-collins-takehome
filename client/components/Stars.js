@@ -1,20 +1,18 @@
-import React, { useRef } from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image';
-import star from '../public/star.png';
+import star from '../public/starr.png';
+import dynamic from "next/dynamic";
 
 const Stars = (props) => {
-  const ChipStyles = useRef({
-    position: 'absolute',
-    top: Math.floor(Math.random()*50),
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-});
 
+
+const starArr= [];
+for(let i = 0; i < props.dbData.length; i++) {
+  starArr.push(<Image id='star-child' width={50} height={50} src={star}></Image>)
+}
   return (
-       <div id= 'star-sky'>
-       {props.dbData.map((star, i) => {
-        <Image id ='db-star' style={ChipStyles.current} key={i} width={50} height={50} alt='star' src={star}/>
-       })}
+       <div className='star-container'>
+        {starArr}
     </div>
     
   )

@@ -4,7 +4,7 @@ exports.id = 405;
 exports.ids = [405];
 exports.modules = {
 
-/***/ 327:
+/***/ 27:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23,17 +23,38 @@ var external_react_ = __webpack_require__(297);
 ;// CONCATENATED MODULE: external "next/head"
 var head_namespaceObject = require("next/head");;
 var head_default = /*#__PURE__*/__webpack_require__.n(head_namespaceObject);
-;// CONCATENATED MODULE: ./components/Intro.js
+// EXTERNAL MODULE: ./node_modules/next/image.js
+var next_image = __webpack_require__(675);
+;// CONCATENATED MODULE: ./public/starr.png
+/* harmony default export */ var starr = ({"src":"/_next/static/image/public/starr.e182fd7442630843d8ce881b2dc241a0.png","height":294,"width":300,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA2UlEQVR42mMAgZ+Xw5lB9K/zIYq/LoTxgti/T3kwMqCD36ftj/y8Gp6MIvjzSrTwx3ct4r/PesT8OWH8/+fV0Kv/d3Fr/dsnL/XrYggnUJdz9u+zLv9/XfT+//uM/V8g/v/npOn/X+c97/+4miDLAAL/DsrX/zlpDhR0+f77tM3fn1eC3n2/m2YMt+bzi1rJn5cD/v85ZQlU5Pr/30G57SDxP6d0WSDuuBYZ/ueU1d+/h7XKftyIWv37jNPL/9uFuRCuP+Op++eYlSrc4Vej7H6f8eBnYGBgAAAtV3EqqsqM7QAAAABJRU5ErkJggg=="});
+;// CONCATENATED MODULE: external "next/dynamic"
+var dynamic_namespaceObject = require("next/dynamic");;
+;// CONCATENATED MODULE: ./components/Stars.js
 
 
 
-const Intro = () => {
+
+
+
+const Stars = props => {
+  const starArr = [];
+
+  for (let i = 0; i < props.dbData.length; i++) {
+    starArr.push( /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {
+      id: "star-child",
+      width: 50,
+      height: 50,
+      src: starr
+    }));
+  }
+
   return /*#__PURE__*/jsx_runtime_.jsx("div", {
-    className: "intro"
+    className: "star-container",
+    children: starArr
   });
 };
 
-/* harmony default export */ var components_Intro = (Intro);
+/* harmony default export */ var components_Stars = (Stars);
 ;// CONCATENATED MODULE: external "react-bootstrap"
 var external_react_bootstrap_namespaceObject = require("react-bootstrap");;
 ;// CONCATENATED MODULE: external "web3"
@@ -41,41 +62,11 @@ var external_web3_namespaceObject = require("web3");;
 var external_web3_default = /*#__PURE__*/__webpack_require__.n(external_web3_namespaceObject);
 // EXTERNAL MODULE: ../contractData.js
 var contractData = __webpack_require__(825);
-// EXTERNAL MODULE: ./node_modules/next/image.js
-var next_image = __webpack_require__(675);
-;// CONCATENATED MODULE: ./public/star.png
-/* harmony default export */ var star = ({"src":"/_next/static/image/public/star.e66b966be1f3659d149399a22a840aee.png","height":766,"width":800,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA5klEQVR42mMAgSc3PBhB9LsnkfKvHwQqgNhXTjmCxCDg7c9VYM6nlwmlr+55loPY///3QBQc2S4i8P+jAheI/eN91tFXd+1PMEAA164NsgIMW1cK2OxeL3zp8FaGVy/vBf64dNz817rFPK9P7VO5ev6wmh0DCDTXMGiuX6Zx8+Jxl//XT+n8f3JN9+7HRyY6DCDw4HoIO4j+/6t06vM73v/3bOD///ym4QKQ2NUTGmwMIPDvZ7PAu8ehz55fl0rpbuGMObZL6cWft+biDDDw/mm0zovbjk4w/oZlElZn9qvoMjAwMAAAdpBkMuivr9YAAAAASUVORK5CYII="});
-;// CONCATENATED MODULE: ./components/Stars.js
-
-
-
-
-
-const Stars = props => {
-  const ChipStyles = (0,external_react_.useRef)({
-    position: 'absolute',
-    top: Math.floor(Math.random() * 50),
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  });
-  return /*#__PURE__*/jsx_runtime_.jsx("div", {
-    id: "star-sky",
-    children: props.dbData.map((star, i) => {
-      /*#__PURE__*/
-      jsx_runtime_.jsx(next_image.default, {
-        id: "db-star",
-        style: ChipStyles.current,
-        width: 50,
-        height: 50,
-        alt: "star",
-        src: star
-      }, i);
-    })
-  });
-};
-
-/* harmony default export */ var components_Stars = (Stars);
+;// CONCATENATED MODULE: external "next/router"
+var router_namespaceObject = require("next/router");;
+var router_default = /*#__PURE__*/__webpack_require__.n(router_namespaceObject);
 ;// CONCATENATED MODULE: ./components/Input.js
+
 
 
 
@@ -115,11 +106,16 @@ const Input = props => {
     const results = await contractInstance.getPastEvents('WishMade', {});
     console.log('results!', results);
     setWish('');
+    setTimeout(() => {
+      router_default().push({
+        pathname: '/'
+      });
+    }, 2000);
   };
 
-  return /*#__PURE__*/(0,jsx_runtime_.jsxs)("div", {
+  return /*#__PURE__*/jsx_runtime_.jsx("div", {
     id: "input-form",
-    children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.InputGroup, {
+    children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.InputGroup, {
       className: "mb-3",
       id: "form",
       onSubmit: onSubmit,
@@ -134,9 +130,7 @@ const Input = props => {
         value: wish,
         onChange: e => setWish(e.target.value)
       })]
-    }), /*#__PURE__*/jsx_runtime_.jsx(components_Stars, {
-      dbData: props.dbData
-    })]
+    })
   });
 };
 
@@ -181,9 +175,9 @@ class Home extends external_react_.Component {
           integrity: "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC",
           crossOrigin: "anonymous"
         })]
-      }), /*#__PURE__*/jsx_runtime_.jsx(components_Intro, {}), /*#__PURE__*/jsx_runtime_.jsx(components_Input, {
+      }), /*#__PURE__*/jsx_runtime_.jsx(components_Stars, {
         dbData: this.props.dbData
-      }), /*#__PURE__*/jsx_runtime_.jsx("div", {
+      }), /*#__PURE__*/jsx_runtime_.jsx(components_Input, {}), /*#__PURE__*/jsx_runtime_.jsx("div", {
         class: "stars"
       }), /*#__PURE__*/jsx_runtime_.jsx("div", {
         class: "twinkling"
@@ -300,7 +294,7 @@ module.exports = require("react/jsx-runtime");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(327); });
+var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(27); });
 module.exports = __webpack_exports__;
 
 })();

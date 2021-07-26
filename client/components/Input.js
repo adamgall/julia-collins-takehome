@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import Web3 from 'web3';
 import { CONTRACT_ABI, CONTRACT_ADDRESS, URL  } from '../../contractData';
-import Stars from './Stars'
+import Stars from './Stars';
+import Router from 'next/router'
 
 const Input = (props) => {
  
@@ -38,8 +39,12 @@ const onSubmit = async (e) => {
       {}
     )
     console.log('results!', results)
-
     setWish('');
+    setTimeout(()=> {
+      Router.push({
+        pathname: '/'
+    })
+    }, 2000)
   }
   return (
     <div id='input-form'>
@@ -54,7 +59,6 @@ const onSubmit = async (e) => {
       onChange={e => setWish(e.target.value)}
     />
   </InputGroup>
-    <Stars dbData={props.dbData}/>
     </div>
   )
 }

@@ -11,10 +11,6 @@
   margin-left: 20%;
 }
 
-#db-star {
-  z-index: 5;
-}
-
 #form {
  width: 60vw;
  height:auto;
@@ -26,6 +22,22 @@
 header a, a:visited {
   text-decoration:none;
   color:#fcfcfc;
+}
+#star-child{
+  position: fixed;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.star-container {
+  position: absolute;
+  top:10;
+  left: 10;
+  right: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 }
 
 @keyframes move-twink-back {
