@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Stars from '../components/Stars';
 import Input from '../components/Input';
 import axios from 'axios';
-
 class Home extends Component {
     static async getInitialProps() {
       let dbData;
@@ -32,9 +31,9 @@ class Home extends Component {
       </Head>
       <Stars dbData={this.props.dbData}/>
         <Input /> 
-          <div class="stars"></div>
-          <div class="twinkling"></div>
-          <div class="clouds"></div>
+          <div className="stars"></div>
+          <div className="twinkling"></div>
+          <div className="clouds"></div>
       </div>
      );
   }

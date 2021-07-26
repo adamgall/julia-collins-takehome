@@ -16,10 +16,6 @@
  height:auto;
 }
 
-#button-addOn1 {
-  color: white !important;
-}
-
 header a, a:visited {
   text-decoration:none;
   color:#fcfcfc;
@@ -30,7 +26,12 @@ header a, a:visited {
   z-index: 5;
   overflow: hidden;
 }
-
+#rocket-container {
+  position: fixed;
+  bottom: 0 !important;
+  right: 0;
+  z-index: 5;
+}
 #modal {
   z-index: 10;
   width: 80%;

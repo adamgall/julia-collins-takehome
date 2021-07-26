@@ -4,7 +4,7 @@ exports.id = 405;
 exports.ids = [405];
 exports.modules = {
 
-/***/ 695:
+/***/ 387:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119,7 +119,11 @@ var contractData = __webpack_require__(825);
 ;// CONCATENATED MODULE: external "next/router"
 var router_namespaceObject = require("next/router");;
 var router_default = /*#__PURE__*/__webpack_require__.n(router_namespaceObject);
+;// CONCATENATED MODULE: ./public/rocket.png
+/* harmony default export */ var rocket = ({"src":"/_next/static/image/public/rocket.e0a2b67cf15e9468ae2520b8cb6558a3.png","height":360,"width":360,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA5ElEQVR42mP4//8/w9OpBUwg+pmTwZwrIgyzQOz/07PAYgxfb+4EM/7/fyjzZMeM/7fXdv37/Gi+BEjs1o4ORoY//28xgzj/nh0ouHxy3f/Tu+b+f3O8NxMk9vHuEmYGEOMgA4P47Z7SX68e7Pz/5NKy/yfyvH70MzCIgq0AEfcYGDguB7ncfL6o6e/lCdn/dspwXz/IwMAGVnDFWZARxLjIwCD2fHrr3stN+XvygWyQ2A4GBkYGEOPFrV9gh/5+v/vsz7vrT4HYD148ZoZb8fd6Epjz67xv+o89vqkg9p/j8WAxAHp2oiLs2idNAAAAAElFTkSuQmCC"});
 ;// CONCATENATED MODULE: ./components/Input.js
+
+
 
 
 
@@ -163,24 +167,35 @@ const Input = props => {
     }, 1000);
   };
 
-  return /*#__PURE__*/jsx_runtime_.jsx("div", {
-    id: "input-form",
-    children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.InputGroup, {
-      className: "mb-3",
-      id: "form",
-      onSubmit: onSubmit,
-      children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Button, {
-        onClick: onSubmit,
-        variant: "outline-secondary",
-        id: "button-addon1",
-        children: "Button"
-      }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.FormControl, {
-        "aria-label": "form-button",
-        "aria-describedby": "basic-addon1",
-        value: wish,
-        onChange: e => setWish(e.target.value)
-      })]
-    })
+  return /*#__PURE__*/(0,jsx_runtime_.jsxs)("div", {
+    children: [/*#__PURE__*/jsx_runtime_.jsx("div", {
+      id: "input-form",
+      children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.InputGroup, {
+        className: "mb-3",
+        id: "form",
+        onSubmit: onSubmit,
+        children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Button, {
+          onClick: onSubmit,
+          variant: "outline-secondary",
+          id: "button-addon1",
+          children: "Button"
+        }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.FormControl, {
+          "aria-label": "form-button",
+          "aria-describedby": "basic-addon1",
+          value: wish,
+          onChange: e => setWish(e.target.value)
+        })]
+      })
+    }), /*#__PURE__*/jsx_runtime_.jsx("div", {
+      id: "rocket-container",
+      children: /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {
+        className: "rocket",
+        src: rocket,
+        width: 160,
+        height: 200,
+        alt: "rocket"
+      })
+    })]
   });
 };
 
@@ -228,11 +243,11 @@ class Home extends external_react_.Component {
       }), /*#__PURE__*/jsx_runtime_.jsx(components_Stars, {
         dbData: this.props.dbData
       }), /*#__PURE__*/jsx_runtime_.jsx(components_Input, {}), /*#__PURE__*/jsx_runtime_.jsx("div", {
-        class: "stars"
+        className: "stars"
       }), /*#__PURE__*/jsx_runtime_.jsx("div", {
-        class: "twinkling"
+        className: "twinkling"
       }), /*#__PURE__*/jsx_runtime_.jsx("div", {
-        class: "clouds"
+        className: "clouds"
       })]
     });
   }
@@ -344,7 +359,7 @@ module.exports = require("react/jsx-runtime");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(695); });
+var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(387); });
 module.exports = __webpack_exports__;
 
 })();

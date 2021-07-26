@@ -4,7 +4,8 @@ import Web3 from 'web3';
 import { CONTRACT_ABI, CONTRACT_ADDRESS, URL  } from '../../contractData';
 import Stars from './Stars';
 import Router from 'next/router'
-
+import Image from 'next/image';
+import rocket from '../public/rocket.png';
 const Input = (props) => {
  
   const [wish, setWish] = useState('');
@@ -39,6 +40,7 @@ const onSubmit = async (e) => {
     }, 1000)
   }
   return (
+    <div>
     <div id='input-form'>
     <InputGroup className="mb-3" id='form' onSubmit={onSubmit}>
     <Button onClick={onSubmit} variant="outline-secondary" id="button-addon1">
@@ -51,6 +53,10 @@ const onSubmit = async (e) => {
       onChange={e => setWish(e.target.value)}
     />
   </InputGroup>
+    </div>
+    <div id="rocket-container">
+    <Image className="rocket" src={rocket} width={160} height={200} alt="rocket" />
+    </div>
     </div>
   )
 }
