@@ -37,10 +37,15 @@ var dynamic_namespaceObject = require("next/dynamic");;
 
 
 const Stars = props => {
+  function onClick(starData) {
+    console.log('starData', starData);
+  }
+
   const starArr = [];
 
   for (let i = 0; i < props.dbData.length; i++) {
     starArr.push( /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {
+      onClick: () => onClick(props.dbData[i]),
       id: "star-child",
       width: 50,
       height: 50,
@@ -105,12 +110,13 @@ const Input = props => {
     console.log('hitting', accounts[0]);
     const results = await contractInstance.getPastEvents('WishMade', {});
     console.log('results!', results);
-    setWish('');
+    setWish(''); //setTimeout and reroute to index.js so getInitialProps can update state of stars
+
     setTimeout(() => {
       router_default().push({
         pathname: '/'
       });
-    }, 2000);
+    }, 1000);
   };
 
   return /*#__PURE__*/jsx_runtime_.jsx("div", {

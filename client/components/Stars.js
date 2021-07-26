@@ -5,10 +5,13 @@ import dynamic from "next/dynamic";
 
 const Stars = (props) => {
 
+function onClick(starData){
+  console.log('starData', starData);
+}
 
 const starArr= [];
 for(let i = 0; i < props.dbData.length; i++) {
-  starArr.push(<Image id='star-child' width={50} height={50} src={star}></Image>)
+  starArr.push(<Image onClick={()=> onClick(props.dbData[i])} id='star-child' width={50} height={50} src={star}></Image>)
 }
   return (
        <div className='star-container'>

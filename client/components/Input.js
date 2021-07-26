@@ -40,11 +40,13 @@ const onSubmit = async (e) => {
     )
     console.log('results!', results)
     setWish('');
+
+    //setTimeout and reroute to index.js so getInitialProps can update state of stars
     setTimeout(()=> {
       Router.push({
         pathname: '/'
     })
-    }, 2000)
+    }, 1000)
   }
   return (
     <div id='input-form'>
