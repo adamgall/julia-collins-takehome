@@ -47,7 +47,7 @@ const ModalData = props => {
     children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.Modal.Dialog, {
       children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Header, {
         children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Title, {
-          children: "Your Wish, Immemorialized In The Stars"
+          children: "Your Dream, Immortalized In The Stars"
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Body, {
         children: /*#__PURE__*/(0,jsx_runtime_.jsxs)("p", {
@@ -98,7 +98,7 @@ const Stars = props => {
       width: 50,
       height: 50,
       src: starr
-    }));
+    }, i));
   }
 
   return /*#__PURE__*/(0,jsx_runtime_.jsxs)("div", {
@@ -125,6 +125,13 @@ var router_default = /*#__PURE__*/__webpack_require__.n(router_namespaceObject);
 
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -139,25 +146,66 @@ const Input = props => {
     1: setWish
   } = (0,external_react_.useState)('');
   const {
-    0: message,
-    1: setMessage
-  } = (0,external_react_.useState)('');
+    0: web3,
+    1: setProvider
+  } = (0,external_react_.useState)(null);
+  const {
+    0: account,
+    1: setAccounts
+  } = (0,external_react_.useState)(null);
+  const {
+    0: contractInstance,
+    1: setContract
+  } = (0,external_react_.useState)(null);
 
-  const onSubmit = async e => {
-    e.preventDefault();
+  const renderTooltip = props => /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Tooltip, _objectSpread(_objectSpread({
+    id: "button-tooltip"
+  }, props), {}, {
+    children: "Empty the Sky, and Start Anew."
+  }));
+
+  (0,external_react_.useEffect)(async () => {
     let web3; //getInitialProps migrate once connected
     //is client connected to provider? if yes...
     // set the provider you want from Web3.providers -- use local ganache
 
-    web3 = new (external_web3_default())(new (external_web3_default()).providers.WebsocketProvider('ws://localhost:7545')); // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));  
+    web3 = new (external_web3_default())(new (external_web3_default()).providers.WebsocketProvider('ws://localhost:7545'));
+    setProvider(web3); // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));  
 
-    const contractInstance = new web3.eth.Contract(contractData.CONTRACT_ABI, contractData.CONTRACT_ADDRESS);
-    const params = web3.utils.asciiToHex(wish).padEnd(66, "0");
+    const contract = new web3.eth.Contract(contractData.CONTRACT_ABI, contractData.CONTRACT_ADDRESS);
+    setContract(contract);
     let accounts = await web3.eth.getAccounts();
-    await contractInstance.methods.hashWish(params).send({
-      from: accounts[0]
-    });
-    const results = await contractInstance.getPastEvents('WishMade', {});
+    setAccounts(accounts[0]);
+  }, []);
+
+  const onSend = async () => {
+    try {
+      await contractInstance.methods.drainWishes().send({
+        from: account
+      });
+    } catch (error) {
+      console.log('Error when calling contract to drainWishes', error);
+    }
+
+    setTimeout(() => {
+      router_default().push({
+        pathname: '/'
+      });
+    }, 1000);
+  };
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    const params = web3.utils.asciiToHex(wish).padEnd(66, "0");
+
+    try {
+      await contractInstance.methods.hashWish(params).send({
+        from: account
+      });
+    } catch (error) {
+      console.log('Error when calling contract to hashWish', error);
+    }
+
     setWish(''); //setTimeout and reroute to index.js so getInitialProps can update state of stars
 
     setTimeout(() => {
@@ -186,14 +234,27 @@ const Input = props => {
           onChange: e => setWish(e.target.value)
         })]
       })
-    }), /*#__PURE__*/jsx_runtime_.jsx("div", {
-      id: "rocket-container",
-      children: /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {
-        className: "rocket",
-        src: rocket,
-        width: 160,
-        height: 200,
-        alt: "rocket"
+    }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.OverlayTrigger, {
+      style: {
+        zIndex: '7',
+        fontSize: '16px'
+      },
+      placement: "top",
+      delay: {
+        show: 250,
+        hide: 400
+      },
+      overlay: renderTooltip,
+      children: /*#__PURE__*/jsx_runtime_.jsx("div", {
+        id: "rocket-container",
+        children: /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {
+          className: "rocket",
+          onClick: onSend,
+          src: rocket,
+          width: 160,
+          height: 200,
+          alt: "rocket"
+        })
       })
     })]
   });
@@ -307,7 +368,7 @@ module.exports = {
       "type": "function"
     }
   ],
-  CONTRACT_ADDRESS: '0xf665F60Cc1353d2Abb4aD5Af60AB32ca8c031D58'
+  CONTRACT_ADDRESS: '0x61CBC353EFF619990930aF457F1e4273c3f59A9E'
 }
 
 /***/ }),

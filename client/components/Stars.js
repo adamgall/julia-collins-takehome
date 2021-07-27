@@ -3,6 +3,7 @@ import Image from 'next/image';
 import star from '../public/starr.png';
 import dynamic from 'next/dynamic';
 import ModalData from '../components/ModalData';
+
 const Stars = (props) => {
 
 const [starData, setData] = useState('');
@@ -15,7 +16,7 @@ function onClick(starData){
 
 const starArr= [];
 for(let i = 0; i < props.dbData.length; i++) {
-  starArr.push(<Image onClick={()=> onClick(props.dbData[i])} id='star-child' width={50} height={50} src={star}></Image>)
+  starArr.push(<Image onClick={()=> onClick(props.dbData[i])} key={i} id='star-child' width={50} height={50} src={star}></Image>)
 }
   return (
     <div className='star-container'>
@@ -24,6 +25,5 @@ for(let i = 0; i < props.dbData.length; i++) {
     </div>
   )
 }
-
 
 export default Stars

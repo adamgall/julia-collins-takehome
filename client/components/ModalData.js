@@ -10,7 +10,7 @@ const ModalData = (props) => {
     <div id='modal'>
     <Modal.Dialog>
     <Modal.Header>
-      <Modal.Title>Your Wish, Immemorialized In The Stars</Modal.Title>
+      <Modal.Title>Your Dream, Immortalized In The Stars</Modal.Title>
     </Modal.Header>
   
     <Modal.Body>
