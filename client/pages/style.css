@@ -31,14 +31,29 @@ header a, a:visited {
   bottom: 0 !important;
   right: 0;
   z-index: 5;
+  margin-left: 2vw !important;
+  cursor: pointer;
 }
+
+@media (max-width: 767px) {                  
+  .rocket {
+    height: 10vh !important;
+    width: 6vw !important;
+  }
+}
+
+
 #modal {
-  z-index: 10;
-  width: 80%;
-  height: auto;
+  z-index: 5;
+  height: 20vh !important;
+  width: 60vw;
+  font-size: 20px;
+  overflow-wrap: break-word;
+  position: absolute !important;
+
 }
 .star-container {
-  position: absolute;
+  position: relative;
   top:10;
   left: 10;
   right: 10;

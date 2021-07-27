@@ -1,9 +1,15 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import Head from 'next/head';
 import Stars from '../components/Stars';
+import IntialModal from '../components/InitialModal';
 import Input from '../components/Input';
 import axios from 'axios';
+import InitialModal from '../components/InitialModal';
 class Home extends Component {
+
+  state = {
+    modal : true
+  }
     static async getInitialProps() {
       let dbData;
       try {
@@ -29,6 +35,12 @@ class Home extends Component {
         crossOrigin="anonymous"
       />
       </Head>
+      <InitialModal
+        show={this.state.modal}
+        onHide={() => this.setState({
+          modal: false
+        })}
+      />
       <Stars dbData={this.props.dbData}/>
         <Input /> 
           <div className="stars"></div>

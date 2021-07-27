@@ -4,7 +4,7 @@ exports.id = 405;
 exports.ids = [405];
 exports.modules = {
 
-/***/ 387:
+/***/ 920:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47,11 +47,12 @@ const ModalData = props => {
     children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.Modal.Dialog, {
       children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Header, {
         children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Title, {
+          id: "example-modal-sizes-title-sm",
           children: "Your Dream, Immortalized In The Stars"
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Body, {
         children: /*#__PURE__*/(0,jsx_runtime_.jsxs)("p", {
-          children: [props.starData._id, " - Star Speak"]
+          children: [props.starData.wish, " - Star Speak"]
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Footer, {
         children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Button, {
@@ -111,6 +112,46 @@ const Stars = props => {
 };
 
 /* harmony default export */ var components_Stars = (Stars);
+;// CONCATENATED MODULE: ./components/InitialModal.js
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+const InitialModal = props => {
+  return /*#__PURE__*/jsx_runtime_.jsx("div", {
+    children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_namespaceObject.Modal, _objectSpread(_objectSpread({}, props), {}, {
+      size: "lg",
+      "aria-labelledby": "contained-modal-title-vcenter",
+      centered: true,
+      children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Header, {
+        closeButton: true,
+        children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Title, {
+          id: "contained-modal-title-vcenter",
+          children: "Welcome to SpaceHash"
+        })
+      }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Body, {
+        children: /*#__PURE__*/jsx_runtime_.jsx("p", {
+          children: "Enter your wishes, hopes, and dreams to be immortalized in the stars forever, safely hashed and protected."
+        })
+      }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Footer, {
+        children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Button, {
+          onClick: props.onHide,
+          children: "Close"
+        })
+      })]
+    }))
+  });
+};
+
+/* harmony default export */ var components_InitialModal = (InitialModal);
 ;// CONCATENATED MODULE: external "web3"
 var external_web3_namespaceObject = require("web3");;
 var external_web3_default = /*#__PURE__*/__webpack_require__.n(external_web3_namespaceObject);
@@ -121,15 +162,18 @@ var router_namespaceObject = require("next/router");;
 var router_default = /*#__PURE__*/__webpack_require__.n(router_namespaceObject);
 ;// CONCATENATED MODULE: ./public/rocket.png
 /* harmony default export */ var rocket = ({"src":"/_next/static/image/public/rocket.e0a2b67cf15e9468ae2520b8cb6558a3.png","height":360,"width":360,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA5ElEQVR42mP4//8/w9OpBUwg+pmTwZwrIgyzQOz/07PAYgxfb+4EM/7/fyjzZMeM/7fXdv37/Gi+BEjs1o4ORoY//28xgzj/nh0ouHxy3f/Tu+b+f3O8NxMk9vHuEmYGEOMgA4P47Z7SX68e7Pz/5NKy/yfyvH70MzCIgq0AEfcYGDguB7ncfL6o6e/lCdn/dspwXz/IwMAGVnDFWZARxLjIwCD2fHrr3stN+XvygWyQ2A4GBkYGEOPFrV9gh/5+v/vsz7vrT4HYD148ZoZb8fd6Epjz67xv+o89vqkg9p/j8WAxAHp2oiLs2idNAAAAAElFTkSuQmCC"});
+;// CONCATENATED MODULE: external "framer-motion"
+var external_framer_motion_namespaceObject = require("framer-motion");;
 ;// CONCATENATED MODULE: ./components/Input.js
 
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function Input_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function Input_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Input_ownKeys(Object(source), true).forEach(function (key) { Input_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Input_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function Input_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -158,10 +202,10 @@ const Input = props => {
     1: setContract
   } = (0,external_react_.useState)(null);
 
-  const renderTooltip = props => /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Tooltip, _objectSpread(_objectSpread({
+  const renderTooltip = props => /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Tooltip, Input_objectSpread(Input_objectSpread({
     id: "button-tooltip"
   }, props), {}, {
-    children: "Empty the Sky, and Start Anew."
+    children: "Click to Empty the Sky, and Start Anew."
   }));
 
   (0,external_react_.useEffect)(async () => {
@@ -245,14 +289,21 @@ const Input = props => {
         hide: 400
       },
       overlay: renderTooltip,
-      children: /*#__PURE__*/jsx_runtime_.jsx("div", {
+      children: /*#__PURE__*/jsx_runtime_.jsx(external_framer_motion_namespaceObject.motion.div, {
+        animate: {
+          y: -30
+        },
+        transition: {
+          type: "spring",
+          stiffness: 10
+        },
         id: "rocket-container",
         children: /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {
           className: "rocket",
           onClick: onSend,
           src: rocket,
-          width: 160,
-          height: 200,
+          width: 80,
+          height: 100,
           alt: "rocket"
         })
       })
@@ -268,12 +319,25 @@ var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_n
 
 
 
+function pages_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
 
 
 
 
 
 class Home extends external_react_.Component {
+  constructor(...args) {
+    super(...args);
+
+    pages_defineProperty(this, "state", {
+      modal: true
+    });
+  }
+
   static async getInitialProps() {
     let dbData;
 
@@ -301,6 +365,11 @@ class Home extends external_react_.Component {
           integrity: "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC",
           crossOrigin: "anonymous"
         })]
+      }), /*#__PURE__*/jsx_runtime_.jsx(components_InitialModal, {
+        show: this.state.modal,
+        onHide: () => this.setState({
+          modal: false
+        })
       }), /*#__PURE__*/jsx_runtime_.jsx(components_Stars, {
         dbData: this.props.dbData
       }), /*#__PURE__*/jsx_runtime_.jsx(components_Input, {}), /*#__PURE__*/jsx_runtime_.jsx("div", {
@@ -420,7 +489,7 @@ module.exports = require("react/jsx-runtime");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(387); });
+var __webpack_exports__ = __webpack_require__.X(0, [821,675], function() { return __webpack_exec__(920); });
 module.exports = __webpack_exports__;
 
 })();

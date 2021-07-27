@@ -6,6 +6,7 @@ import Stars from './Stars';
 import Router from 'next/router'
 import Image from 'next/image';
 import rocket from '../public/rocket.png';
+import { motion } from 'framer-motion';
 
 const Input = (props) => {
  
@@ -92,9 +93,12 @@ const onSubmit = async (e) => {
     delay={{ show: 250, hide: 400 }}
     overlay={renderTooltip}
   >
-    <div id="rocket-container">
-    <Image className="rocket" onClick={onSend} src={rocket} width={160} height={200} alt="rocket" />
-    </div>
+    <motion.div 
+    animate={{ y: -30 }}
+    transition={{ type: "spring", stiffness: 10 }}
+    id="rocket-container">
+    <Image className="rocket" onClick={onSend} src={rocket} width={80} height={100} alt="rocket" />
+    </motion.div>
     </OverlayTrigger>
     </div>
   )
