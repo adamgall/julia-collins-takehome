@@ -132,14 +132,13 @@ const InitialModal = props => {
       "aria-labelledby": "contained-modal-title-vcenter",
       centered: true,
       children: [/*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Header, {
-        closeButton: true,
         children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Title, {
           id: "contained-modal-title-vcenter",
           children: "Welcome to SpaceHash"
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Body, {
-        children: /*#__PURE__*/jsx_runtime_.jsx("p", {
-          children: "Enter your wishes, hopes, and dreams to be immortalized in the stars forever, safely hashed and protected."
+        children: /*#__PURE__*/(0,jsx_runtime_.jsxs)("p", {
+          children: ["Enter in your wishes, hopes, and dreams to be immortalized in the stars forever.", /*#__PURE__*/jsx_runtime_.jsx("br", {}), /*#__PURE__*/jsx_runtime_.jsx("br", {}), "We will hash them away into the bitverse, keeping them secret and protected."]
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Modal.Footer, {
         children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_namespaceObject.Button, {

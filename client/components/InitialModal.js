@@ -16,8 +16,11 @@ const InitialModal = (props) => {
     </Modal.Header>
     <Modal.Body>
       <p>
-        Enter your wishes, hopes, and dreams to be immortalized in the stars 
-        forever, safely hashed and protected.
+        Enter in your wishes, hopes, and dreams to be immortalized in the stars 
+        forever.
+      <br></br>
+      <br></br>
+        We will hash them away into the bitverse, keeping them secret and protected.
       </p>
     </Modal.Body>
     <Modal.Footer>
