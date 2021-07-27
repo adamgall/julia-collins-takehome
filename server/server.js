@@ -87,13 +87,13 @@ contractInstance.events.WishMade({})
   db.hashWish(event.returnValues.wish);
 
 })
-.on('error', event => console.log('Error with event listerner', event));
+.on('error', event => console.log('Error with event listener', event));
 
 contractInstance.events.DrainWishes({})
 .on('data', event => {
   db.deleteAllWishes()
 })
-.on('error', event => console.log('Error with event listerner', event));
+.on('error', event => console.log('Error with event listener', event));
 
 app.get('/getWishes', db.getAllWishes, (req, res, next) => {
   console.log('SUCCESS', res.locals.wishes);
