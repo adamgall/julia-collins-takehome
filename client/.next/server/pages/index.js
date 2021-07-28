@@ -154,8 +154,6 @@ const InitialModal = props => {
 ;// CONCATENATED MODULE: external "web3"
 var external_web3_namespaceObject = require("web3");;
 var external_web3_default = /*#__PURE__*/__webpack_require__.n(external_web3_namespaceObject);
-// EXTERNAL MODULE: ../contractData.js
-var contractData = __webpack_require__(825);
 ;// CONCATENATED MODULE: external "next/router"
 var router_namespaceObject = require("next/router");;
 var router_default = /*#__PURE__*/__webpack_require__.n(router_namespaceObject);
@@ -172,7 +170,6 @@ function Input_ownKeys(object, enumerableOnly) { var keys = Object.keys(object);
 function Input_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Input_ownKeys(Object(source), true).forEach(function (key) { Input_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Input_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function Input_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -215,7 +212,7 @@ const Input = props => {
     web3 = new (external_web3_default())(new (external_web3_default()).providers.WebsocketProvider('ws://localhost:7545'));
     setProvider(web3); // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));  
 
-    const contract = new web3.eth.Contract(contractData.CONTRACT_ABI, contractData.CONTRACT_ADDRESS);
+    const contract = new web3.eth.Contract([{"anonymous":false,"inputs":[],"name":"DrainWishes","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bytes32","name":"wish","type":"bytes32"}],"name":"WishMade","type":"event"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"_wish","type":"bytes32"}],"name":"hashWish","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drainWishes","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}], "0x61CBC353EFF619990930aF457F1e4273c3f59A9E");
     setContract(contract);
     let accounts = await web3.eth.getAccounts();
     setAccounts(accounts[0]);
@@ -384,60 +381,6 @@ class Home extends external_react_.Component {
 }
 
 /* harmony default export */ var pages = (Home);
-
-/***/ }),
-
-/***/ 825:
-/***/ (function(module) {
-
-module.exports = {
-  CONTRACT_ABI: [
-    {
-      "anonymous": false,
-      "inputs": [],
-      "name": "DrainWishes",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "bytes32",
-          "name": "wish",
-          "type": "bytes32"
-        }
-      ],
-      "name": "WishMade",
-      "type": "event"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "_wish",
-          "type": "bytes32"
-        }
-      ],
-      "name": "hashWish",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [],
-      "name": "drainWishes",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ],
-  CONTRACT_ADDRESS: '0x61CBC353EFF619990930aF457F1e4273c3f59A9E'
-}
 
 /***/ }),
 
