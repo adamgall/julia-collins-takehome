@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
+
 require('dotenv').config();
 
-/**
- * Establishing connection with MongoDB and declaring schema
- */
+const uri = process.env.MONGO_URI || '';
 
-const myUri = process.env.MONGO_URI || '';
-
-mongoose.connect(myUri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database: WishHasher');
 });
