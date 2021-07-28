@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { InputGroup, FormControl, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Web3 from 'web3';
-import { CONTRACT_ABI, CONTRACT_ADDRESS, URL  } from '../../contractData';
 import Stars from './Stars';
 import Router from 'next/router'
 import Image from 'next/image';
@@ -29,7 +28,7 @@ const Input = (props) => {
   web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545')); 
   setProvider(web3);
   // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));  
-  const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+  const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
   setContract(contract);
   let accounts = await web3.eth.getAccounts();
   setAccounts(accounts[0]);

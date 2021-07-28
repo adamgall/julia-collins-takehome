@@ -5,26 +5,29 @@ const SALT_WORK_FACTOR = 10;
 
 db = {
     hashWish(wish){
+
+    let hashedWish = '';
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
       bcrypt.hash(wish, salt, function(err, hash) {
         if(err) {
           console.log('Error with hashing string', err)
         } else {
-          console.log('Password is hashing correctly');
+          console.log('Password is hashing correctly', hash);
+          let newWish = new WishHasher({
+            wish: hash
+          });
+      
+          newWish.save((err, data) => {
+            if(err) {
+              console.log('Error saving wish to database', err)
+            }
+            else {
+              console.log('Wish saved to be hashed')
+            }
+          })
         }
         });
     });
-    let newWish = new WishHasher({
-      wish
-    });
-    newWish.save((err, data) => {
-      if(err) {
-        console.log('Error saving wish to database', err)
-      }
-      else {
-        console.log('Wish saved to be hashed')
-      }
-    })
   },
   deleteAllWishes(){
         WishHasher.deleteMany({}, (err, data) => {
