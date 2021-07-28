@@ -85,7 +85,6 @@ contractInstance.events.WishMade({})
 .on('data', event => {
   console.log('EVENT EMITTED SERVER-data', event.returnValues.wish)
   db.hashWish(event.returnValues.wish);
-
 })
 .on('error', event => console.log('Error with event listener', event));
 
