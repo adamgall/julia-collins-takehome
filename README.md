@@ -1,4 +1,4 @@
-# ProjectQ
+# Decent
 
 Instructions:
 
