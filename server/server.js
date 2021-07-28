@@ -99,7 +99,6 @@ const contractInstance = new web3.eth.Contract(abi, contractAddress);
 
 contractInstance.events.WishMade({})
   .on('data', (event) => {
-    console.log('EVENT EMITTED SERVER-data', event.returnValues.wish);
     db.hashWish(event.returnValues.wish);
   })
   .on('error', (event) => console.log('Error with event listener', event));
@@ -111,7 +110,6 @@ contractInstance.events.DrainWishes({})
   .on('error', (event) => console.log('Error with event listener', event));
 
 app.get('/getWishes', db.getAllWishes, (req, res) => {
-  console.log('SUCCESS', res.locals.wishes);
   res.status(200).send(res.locals.wishes);
 });
 

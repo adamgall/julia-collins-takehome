@@ -2,6 +2,7 @@ node_modules
 client/node_modules
 build
 client/.next
+custom-docs
 
 # next.js build output
 .next
