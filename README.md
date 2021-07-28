@@ -25,7 +25,7 @@ Instructions:
 
   - Copy the contact address e.g. `0x8732939cE66C8752ED55d0e186A8cdc0a66C0c59`
   - Update the `CONTRACT_ADDRESS` value in the `.env` file in the root folder.
-  - Update the `CONTRACT_ADDRESS` in the `contractData.js` file in the root folder.
+  - Update the `CONTRACT_ADDRESS` in the `.env` file in the client root folder.
 
  5. Start server
   ```
