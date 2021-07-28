@@ -1,54 +1,61 @@
-const WishHasher = require('./WishesModel.js');
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
 const bcrypt = require('bcrypt');
+const WishHasher = require('./WishesModel');
 
 const SALT_WORK_FACTOR = 10;
 
-db = {
-    hashWish(wish){
-
-    let hashedWish = '';
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-      bcrypt.hash(wish, salt, function(err, hash) {
-        if(err) {
-          console.log('Error with hashing string', err)
-        } else {
+const db = {
+  /**
+   * Db stores wishes, input by the client, received via event emitted by smart contract
+   * @param {string} wish -Bytes32
+   */
+  hashWish(wish) {
+    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+      bcrypt.hash(wish, salt, (error, hash) => {
+        if (err) throw err;
+        else {
           console.log('Password is hashing correctly', hash);
-          let newWish = new WishHasher({
-            wish: hash
+          const newWish = new WishHasher({
+            wish: hash,
           });
-      
+
           newWish.save((err, data) => {
-            if(err) {
-              console.log('Error saving wish to database', err)
-            }
+            if (err) throw err;
             else {
-              console.log('Wish saved to be hashed')
+              console.log('Wish saved to be hashed');
             }
-          })
+          });
         }
-        });
+      });
     });
   },
-  deleteAllWishes(){
-        WishHasher.deleteMany({}, (err, data) => {
-          if(err) {
-            console.log('Error deleting wishes from databse', err)
-          } else {
-            console.log('Wishes drained');
-          }
-        })
+  /**
+   * Deletes all wishes upon request from client
+   */
+  deleteAllWishes() {
+    WishHasher.deleteMany({}, (err, data) => {
+      if (err) throw err;
+      else {
+        console.log('Wishes drained', data);
+      }
+    });
   },
+
+  /**
+   * Upon initialization of app or a rerender of the index.js page in client folder,
+   * client makes request to retrieve all wishes from db
+   */
   getAllWishes(req, res, next) {
     WishHasher.find((err, data) => {
-      if(err) {
-        console.log('error', err)
-      } else {
+      if (err) throw err;
+      else {
         res.locals.wishes = data;
       }
       next();
-    })
-  }
-}
+    });
+  },
+};
 
 module.exports = db;
-

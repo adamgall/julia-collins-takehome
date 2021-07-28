@@ -1,112 +1,127 @@
-const express = require("express");
-const app = express()
-const path = require("path")
+const express = require('express');
+
+const app = express();
 const PORT = 3001;
-// const db = require('../server/controllers/wishController.js')
 const Web3 = require('web3');
-const HashingWell = require('../build/contracts/HashingWell.json');
-const { hashWish, deleteAllWishes, getAllWishes } = require('./db/wishesController.js');
+const db = require('./db/wishesController');
 
 require('dotenv').config();
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-		res.setHeader("Access-Control-Allow-Credentials", "true");
-		res.setHeader("Access-Control-Max-Age", "1800");
-		res.setHeader("Access-Control-Allow-Headers", "content-type");
-		res.setHeader("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, PATCH, OPTIONS");
-  next()
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '1800');
+  res.setHeader('Access-Control-Allow-Headers', 'content-type');
+  res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, PATCH, OPTIONS');
+  next();
 });
 
-const contract_address = process.env.CONTRACT_ADDRESS;
+const contractAddress = process.env.CONTRACT_ADDRESS;
+
+/**
+ * Access contract abi via the build folder after compiling contract
+ */
+
 const abi = [
   {
-    "anonymous": false,
-    "inputs": [],
-    "name": "DrainWishes",
-    "type": "event"
+    anonymous: false,
+    inputs: [],
+    name: 'DrainWishes',
+    type: 'event',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "wish",
-        "type": "bytes32"
-      }
+        indexed: false,
+        internalType: 'bytes32',
+        name: 'wish',
+        type: 'bytes32',
+      },
     ],
-    "name": "WishMade",
-    "type": "event"
+    name: 'WishMade',
+    type: 'event',
   },
   {
-    "constant": false,
-    "inputs": [
+    constant: false,
+    inputs: [
       {
-        "internalType": "bytes32",
-        "name": "_wish",
-        "type": "bytes32"
-      }
+        internalType: 'bytes32',
+        name: '_wish',
+        type: 'bytes32',
+      },
     ],
-    "name": "hashWish",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: 'hashWish',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "constant": false,
-    "inputs": [],
-    "name": "drainWishes",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
+    constant: false,
+    inputs: [],
+    name: 'drainWishes',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+];
+
+/**
+ * Config settings for web3 provider (options)
+ * Enables auto reconnection
+ */
+
 const options = {
-  // Enable auto reconnection
   reconnect: {
-      auto: true,
-      delay: 5000, // ms
-      maxAttempts: 30,
-      onTimeout: false
-  }
+    auto: true,
+    delay: 5000, // ms
+    maxAttempts: 30,
+    onTimeout: false,
+  },
 };
+/**
+ * After importing Web3, establish connection with a web3 provider
+ * (how web3 talks to the blockchain)
+ * Then, get the deployed contract instance using the abi and contract
+ * address (.env file)
+ */
 
-const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545', options));  
-//get access to contract instance
-const contractInstance = new web3.eth.Contract(abi, contract_address)
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545', options));
+const contractInstance = new web3.eth.Contract(abi, contractAddress);
 
-//use web sockets to enable server to listen for when events are emitted by our contract instance 
-//make call to controller to encrypt string and store in db
+/**
+ * Enable websockets, on 'data', to listen for specific events emitted from our contract instance
+ * Execute logic, according to event
+ */
 
 contractInstance.events.WishMade({})
-.on('data', event => {
-  console.log('EVENT EMITTED SERVER-data', event.returnValues.wish)
-  db.hashWish(event.returnValues.wish);
-})
-.on('error', event => console.log('Error with event listener', event));
+  .on('data', (event) => {
+    console.log('EVENT EMITTED SERVER-data', event.returnValues.wish);
+    db.hashWish(event.returnValues.wish);
+  })
+  .on('error', (event) => console.log('Error with event listener', event));
 
 contractInstance.events.DrainWishes({})
-.on('data', event => {
-  db.deleteAllWishes()
-})
-.on('error', event => console.log('Error with event listener', event));
+  .on('data', () => {
+    db.deleteAllWishes();
+  })
+  .on('error', (event) => console.log('Error with event listener', event));
 
-app.get('/getWishes', db.getAllWishes, (req, res, next) => {
+app.get('/getWishes', db.getAllWishes, (req, res) => {
   console.log('SUCCESS', res.locals.wishes);
   res.status(200).send(res.locals.wishes);
-})
+});
 
 // GLOBAL ERROR HANDLER
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
     message: { err: 'An error occurred' },
   };
-  const errorObj = Object.assign({}, defaultErr, err);
+  const errorObj = { ...defaultErr, ...err };
   console.log(errorObj.status, errorObj.message);
   return res.status(errorObj.status).send(errorObj.message.err);
 });
