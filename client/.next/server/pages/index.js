@@ -36,8 +36,6 @@ var external_react_bootstrap_namespaceObject = require("react-bootstrap");;
 
 /* eslint-disable react/destructuring-assignment */
 
-/* eslint-disable react/prop-types */
-
 
 
 const ModalData = props => {
@@ -192,7 +190,7 @@ const Input = () => {
     const web3 = new (external_web3_default())(new (external_web3_default()).providers.WebsocketProvider('ws://localhost:7545'));
     setProvider(web3); // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
 
-    const contract = new web3.eth.Contract([{"anonymous":false,"inputs":[],"name":"DrainWishes","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bytes32","name":"wish","type":"bytes32"}],"name":"WishMade","type":"event"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"_wish","type":"bytes32"}],"name":"hashWish","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drainWishes","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}], "0x61CBC353EFF619990930aF457F1e4273c3f59A9E");
+    const contract = new web3.eth.Contract([{"anonymous":false,"inputs":[],"name":"DrainWishes","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bytes32","name":"wish","type":"bytes32"}],"name":"WishMade","type":"event"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"_wish","type":"bytes32"}],"name":"hashWish","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drainWishes","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}], "0x343C47454BcddA42286B7fBB3482F884529E93A8");
     setContract(contract);
     const accounts = await web3.eth.getAccounts();
     setAccounts(accounts[0]);
@@ -278,11 +276,12 @@ const Input = () => {
       overlay: renderTooltip,
       children: /*#__PURE__*/jsx_runtime_.jsx(external_framer_motion_namespaceObject.motion.div, {
         animate: {
-          y: -30
+          y: -30,
+          rotate: 360
         },
         transition: {
           type: 'spring',
-          stiffness: 10
+          stiffness: 13
         },
         id: "rocket-container",
         children: /*#__PURE__*/jsx_runtime_.jsx(next_image.default, {

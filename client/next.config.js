@@ -1,4 +1,7 @@
 module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   env: {
     CONTRACT_ABI: [
       {
@@ -45,6 +48,6 @@ module.exports = {
         type: 'function',
       },
     ],
-    CONTRACT_ADDRESS: '0x61CBC353EFF619990930aF457F1e4273c3f59A9E',
+    CONTRACT_ADDRESS: '0x343C47454BcddA42286B7fBB3482F884529E93A8',
   },
 };

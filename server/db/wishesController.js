@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
 const bcrypt = require('bcrypt');
 const WishHasher = require('./WishesModel');
 
