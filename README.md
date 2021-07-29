@@ -1,6 +1,6 @@
 # Decent
 
-Instructions:
+Initial Setup Instructions:
 
  1. Install Ganache locally  `brew install --cask ganache`.
  - Choose Ethereum (Quickstart)
