@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
 const bcrypt = require('bcrypt');
 const WishHasher = require('./WishesModel');
 
@@ -9,7 +6,7 @@ const SALT_WORK_FACTOR = 10;
 const db = {
   /**
    * Db stores wishes, input by the client, received via event emitted by smart contract
-   * @param {string} wish -Bytes32
+   * @param {string} wish Bytes32
    */
   hashWish(wish) {
     bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
