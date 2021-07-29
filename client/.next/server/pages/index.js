@@ -190,7 +190,7 @@ const Input = () => {
     const web3 = new (external_web3_default())(new (external_web3_default()).providers.WebsocketProvider('ws://localhost:7545'));
     setProvider(web3); // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
 
-    const contract = new web3.eth.Contract([{"anonymous":false,"inputs":[],"name":"DrainWishes","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bytes32","name":"wish","type":"bytes32"}],"name":"WishMade","type":"event"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"_wish","type":"bytes32"}],"name":"hashWish","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drainWishes","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}], "0x343C47454BcddA42286B7fBB3482F884529E93A8");
+    const contract = new web3.eth.Contract([{"anonymous":false,"inputs":[],"name":"DrainWishes","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bytes32","name":"wish","type":"bytes32"}],"name":"WishMade","type":"event"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"_wish","type":"bytes32"}],"name":"hashWish","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drainWishes","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}], "0x1cccDA51933AF69D5E2edf58C3F4E6D12d921159");
     setContract(contract);
     const accounts = await web3.eth.getAccounts();
     setAccounts(accounts[0]);

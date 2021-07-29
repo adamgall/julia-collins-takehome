@@ -1,5 +1,5 @@
-const HashingWell = artifacts.require("HashingWell");
+const GravityHash = artifacts.require("GravityHash");
 
 module.exports = function (deployer) {
-  deployer.deploy(HashingWell);
+  deployer.deploy(GravityHash);
 };
