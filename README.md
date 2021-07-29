@@ -1,6 +1,24 @@
 # Decent
 
-Instructions:
+Quick Startup Instructions:
+
+(After downloading and pairing with Ganache...)
+
+ 1. Start server
+  ```
+  cd server
+  npm run start-dev
+  ```
+
+ 2. Start Client
+  ```
+  cd client
+  npm i 
+  npm run build
+  npm run start
+  ```
+
+Initial Setup Instructions:
 
  1. Install Ganache locally  `brew install --cask ganache`.
  - Choose Ethereum (Quickstart)

@@ -110,8 +110,8 @@ const Input = () => {
         overlay={renderTooltip}
       >
         <motion.div
-          animate={{ y: -30 }}
-          transition={{ type: 'spring', stiffness: 10 }}
+          animate={{ y: -30, rotate: 360 }}
+          transition={{ type: 'spring', stiffness: 13 }}
           id="rocket-container"
         >
           <Image className="rocket" onClick={onSend} src={rocket} width={80} height={100} alt="rocket" />

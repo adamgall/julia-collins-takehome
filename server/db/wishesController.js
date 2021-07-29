@@ -41,7 +41,7 @@ const db = {
   },
 
   /**
-   * Upon initialization of app or a rerender of the index.js page in client folder,
+   * Upon initialization of app or a rerender of the client/index.js page,
    * client makes request to retrieve all wishes from db
    */
   getAllWishes(req, res, next) {
