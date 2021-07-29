@@ -1,4 +1,21 @@
 # Decent
+Quick Startup Instructions:
+
+(After opening ganache and pairing to app)
+
+1. Start server
+  ```
+  cd server
+  npm run start-dev
+  ```
+
+ 2. Start Client
+  ```
+  cd client
+  npm i 
+  npm run build
+  npm run start
+  ```
 
 Initial Setup Instructions:
 
