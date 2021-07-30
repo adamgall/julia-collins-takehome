@@ -16,6 +16,7 @@
     "bcrypt": "^5.0.1",
     "create-next-app": "^11.0.1",
     "dotenv": "^10.0.0",
+    "mongodb": "^4.0.1",
     "mongoose": "^5.13.3",
     "nodemon": "^2.0.12",
     "truffle": "^5.4.2",

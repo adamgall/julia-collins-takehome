@@ -1,13 +1,24 @@
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
-require('dotenv').config();
+  /**
+   * Establish local connection with mongodb and instantiate a 
+   * local 'wish-hasher' database
+   */
 
-const uri = process.env.MONGO_URI || '';
+const url = 'mongodb://127.0.0.1:27017/wish-hasher';
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.once('open', () => {
-  console.log('Connected to Database: WishHasher');
-});
+mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true });
+
+const database = mongoose.connection;
+
+database.once('open', _ => {
+  console.log('Database connected:', url)
+})
+
+database.on('error', err => {
+  console.error('connection error:', err)
+})
 
 const WishSchema = mongoose.Schema({
   wish: {
@@ -15,6 +26,6 @@ const WishSchema = mongoose.Schema({
   },
 });
 
-const WishHasher = mongoose.model('wish', WishSchema);
+const WishHasher = mongoose.model('Wish', WishSchema);
 
 module.exports = WishHasher;

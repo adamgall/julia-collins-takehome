@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
-const WishHasher = require('./WishesModel');
-
+const WishHasher = require('./WishesModel.js');
 const SALT_WORK_FACTOR = 10;
 
 const db = {
@@ -49,6 +48,7 @@ const db = {
       if (err) throw err;
       else {
         res.locals.wishes = data;
+        console.log('got all wishes', data)
       }
       next();
     });
