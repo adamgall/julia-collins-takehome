@@ -89,7 +89,7 @@ const options = {
  * address (.env file)
  */
 
-const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545', options));
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545', options));
 const contractInstance = new web3.eth.Contract(abi, contractAddress);
 
 /**

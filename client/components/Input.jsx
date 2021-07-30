@@ -32,13 +32,23 @@ const Input = () => {
    */
 
   useEffect(async () => {
-    const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545'));
-    setProvider(web3);
-    // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
-    const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
-    setContract(contract);
-    const accounts = await web3.eth.getAccounts();
-    setAccounts(accounts[0]);
+    const getProvider = async () => {
+      // Check if browser is running Metamask
+      let web3;
+      if (window.ethereum) {
+          web3 = new Web3(window.ethereum);
+      } else if (window.web3) {
+          web3 = new Web3(window.web3.currentProvider);
+      };
+      setProvider(web3);
+      const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
+      setContract(contract);
+      // retrieving the accounts
+      const accounts = await web3.eth.getAccounts();
+      console.log(accounts)
+      setAccounts(accounts[0]);
+  };
+  getProvider();
   }, []);
 
   /**
