@@ -31,9 +31,7 @@ const Input = () => {
    * gets reference to contract instance, and accesses an account used to make calls to contract
    */
 
-  useEffect(async () => {
-    const getProvider = async () => {
-      // Check if browser is running Metamask
+    useEffect(async () => {
       let web3;
       if (window.ethereum) {
           web3 = new Web3(window.ethereum);
@@ -41,15 +39,13 @@ const Input = () => {
           web3 = new Web3(window.web3.currentProvider);
       };
       setProvider(web3);
+      // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
       const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
       setContract(contract);
-      // retrieving the accounts
       const accounts = await web3.eth.getAccounts();
-      console.log(accounts)
       setAccounts(accounts[0]);
-  };
-  getProvider();
-  }, []);
+    }, []);
+
 
   /**
  * When client clicks the #rocket, onSend fn makes an API request to empty the
