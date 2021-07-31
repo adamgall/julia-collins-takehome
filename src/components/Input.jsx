@@ -31,21 +31,20 @@ const Input = () => {
    * gets reference to contract instance, and accesses an account used to make calls to contract
    */
 
-    useEffect(async () => {
-      let web3;
-      
-      if (window.ethereum) {
-          web3 = new Web3(window.web3.currentProvider);
-      };
-      
-      setProvider(web3);
-      // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
-      const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
-      setContract(contract);
-      const accounts = await web3.eth.getAccounts();
-      setAccounts(accounts[0]);
-    }, []);
+  useEffect(async () => {
+    let web3;
 
+    if (window.ethereum) {
+      web3 = new Web3(window.web3.currentProvider);
+    }
+
+    setProvider(web3);
+    // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
+    const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
+    setContract(contract);
+    const accounts = await web3.eth.getAccounts();
+    setAccounts(accounts[0]);
+  }, []);
 
   /**
  * When client clicks the #rocket, onSend fn makes an API request to empty the
@@ -76,7 +75,6 @@ const Input = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const params = web3.utils.asciiToHex(wish).padEnd(66, '0');
     try {
       await contractInstance.methods.hashWish(params).send({
