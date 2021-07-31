@@ -17,7 +17,7 @@ const handle = app.getRequestHandler();
 
 
 /**
- * Connect to nextjs server
+ * Connect to nextjs server, using the express framework
  */
 app.prepare().then(function () {
   const server = express();

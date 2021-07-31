@@ -1,5 +1,7 @@
 [] * update readme to simplify the dev setup process using project-specific truffle dependency (no need for external ganache) and `npx truffle develop`
+
 [X] * make project fully local -- no hosted database
+
 [] * move _all_ environment-specific data to gitignored configuration files, so developer-specific data doesn't affect the repo
 
 [X] * remove dual-backends -- either use strict client-side react (create react app) with express, or drop express and use next's server capabilities
