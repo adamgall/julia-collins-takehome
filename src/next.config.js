@@ -48,6 +48,6 @@ module.exports = {
         type: 'function',
       },
     ],
-    CONTRACT_ADDRESS: '0x89C75683Ea8FD261F05B7AFFaB02B0599A017794',
+    CONTRACT_ADDRESS: '0x1955924B08c06850618d25f87C607B1f7C00357a',
   },
 };
