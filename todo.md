@@ -4,7 +4,13 @@
 
 [X] * remove dual-backends -- either use strict client-side react (create react app) with express, or drop express and use next's server capabilities
 
-[] * don't mix class-based react with functional component react -- make it consistent with all to functional components and hooks
+Comments:
+
+I customized the nextjs server, migrating my initial server over.
+
+[X] * don't mix class-based react with functional component react -- make it consistent with all to functional components and hooks
+
+Comments: All of the components are now functional components using hooks, my preference.
 
 [X] * require a user's injected provider to make transactions, to remove the dependency of user's running their own unlocked node
 
