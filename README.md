@@ -31,16 +31,15 @@ Initial Setup Instructions:
   }
   ```
 
-  (If having difficulties, this blog post was very helpful: )
 3. Get App Dependencies Setup
 
-  - cd into 'Decent' folder
+  -cd into 'Decent' folder
   
   ```
   npx truffle develop
   ```
 
-  - In another terminal:
+  -In another terminal:
 
   ```
   npm i
