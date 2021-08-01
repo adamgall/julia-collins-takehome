@@ -77,6 +77,7 @@ Initial Setup Instructions:
   ```
 
   -Truffle migrate will compile and deploy an instance of the smart contract, copy that address and paste in the src/next.config.js file under CONTRACT_ADDRESS
+  
   -Paste in the server.js file on line 37 as well
 
   In another terminal (terminal 2), start the server:
