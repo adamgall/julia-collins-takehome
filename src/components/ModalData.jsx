@@ -2,7 +2,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const ModalData = ({ starData, setShowData }) => {
+const ModalData = ({ starData, setShowData, showAll }) => {
   /**
    *  Component renders on initial rendering of application, using the setShowData hook
    */
@@ -19,7 +19,7 @@ const ModalData = ({ starData, setShowData }) => {
 
         <Modal.Body>
           <p>
-            {starData.wish}
+            {showAll ? starData : starData.wish}
             - Star Speak
           </p>
         </Modal.Body>

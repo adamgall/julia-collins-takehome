@@ -43,19 +43,6 @@ app.prepare().then(() => {
   const abi = [
     {
       anonymous: false,
-      inputs: [
-        {
-          indexed: false,
-          internalType: 'bytes32[]',
-          name: 'allWishes',
-          type: 'bytes32[]',
-        },
-      ],
-      name: 'AllWishes',
-      type: 'event',
-    },
-    {
-      anonymous: false,
       inputs: [],
       name: 'DrainWishes',
       type: 'event',
@@ -120,19 +107,6 @@ app.prepare().then(() => {
         {
           internalType: 'bytes32[]',
           name: '_userWishes',
-          type: 'bytes32[]',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getMyWishes',
-      outputs: [
-        {
-          internalType: 'bytes32[]',
-          name: '_myWishes',
           type: 'bytes32[]',
         },
       ],

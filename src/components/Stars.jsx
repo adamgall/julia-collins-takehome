@@ -4,7 +4,7 @@ import Image from 'next/image';
 import ModalData from './ModalData';
 import star from '../public/starr.png';
 
-const Stars = (props) => {
+const Stars = ({ dbData, showAll }) => {
   const [starData, setData] = useState('');
   const [showData, setShowData] = useState(false);
 
@@ -15,18 +15,19 @@ const Stars = (props) => {
  */
 
   function onClick(data) {
+    console.log(data);
     setData(data);
     setShowData(true);
   }
 
   const starArr = [];
-  for (let i = 0; i < props.dbData.length; i += 1) {
-    starArr.push(<Image onClick={() => onClick(props.dbData[i])} key={i} id="star-child" width={50} height={50} src={star} />);
+  for (let i = 0; i < dbData.length; i += 1) {
+    starArr.push(<Image onClick={() => onClick(dbData[i])} key={i} id="star-child" width={50} height={50} src={star} />);
   }
   return (
     <div className="star-container">
       {starArr}
-      {showData ? <ModalData setShowData={setShowData} starData={starData} /> : ''}
+      {showData ? <ModalData showAll={showAll} setShowData={setShowData} starData={starData} /> : ''}
     </div>
   );
 };

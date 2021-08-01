@@ -6,19 +6,6 @@ module.exports = {
     CONTRACT_ABI: [
       {
         anonymous: false,
-        inputs: [
-          {
-            indexed: false,
-            internalType: 'bytes32[]',
-            name: 'allWishes',
-            type: 'bytes32[]',
-          },
-        ],
-        name: 'AllWishes',
-        type: 'event',
-      },
-      {
-        anonymous: false,
         inputs: [],
         name: 'DrainWishes',
         type: 'event',
@@ -86,24 +73,11 @@ module.exports = {
             type: 'bytes32[]',
           },
         ],
-        stateMutability: 'nonpayable',
-        type: 'function',
-      },
-      {
-        inputs: [],
-        name: 'getMyWishes',
-        outputs: [
-          {
-            internalType: 'bytes32[]',
-            name: '_myWishes',
-            type: 'bytes32[]',
-          },
-        ],
         stateMutability: 'view',
         type: 'function',
         constant: true,
       },
     ],
-    CONTRACT_ADDRESS: '0x1955924B08c06850618d25f87C607B1f7C00357a',
+    CONTRACT_ADDRESS: '0xb0dD599957fbF41b228dF67D72BeC66613198f4d',
   },
 };

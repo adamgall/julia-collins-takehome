@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
@@ -8,15 +9,14 @@ import Router from 'next/router';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHistory } from '@fortawesome/free-solid-svg-icons';
 import rocket from '../public/rocket.png';
 
-const Input = () => {
+const Input = ({ setAllData, setShowAll }) => {
   const [wish, setWish] = useState('');
   const [web3, setProvider] = useState(null);
   const [account, setAccounts] = useState(null);
   const [contractInstance, setContract] = useState(null);
-  // const [allWishes, setAllData] = useState(null);
 
   /**
    * On hover of rocket, renders a string to the client indicating click functionality
@@ -30,7 +30,7 @@ const Input = () => {
 
   const renderTooltipUsers = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Click to see every hashed wish to the bitverse.
+      Click to see all past wishes, unhashed.
     </Tooltip>
   );
 
@@ -75,15 +75,21 @@ const Input = () => {
   };
 
   const getAll = async () => {
+    const result = [];
     try {
-      const allWishes = await contractInstance.methods.getWishes().call({
+      await contractInstance.methods.getWishes().call({
         from: account,
       })
-        .then((result) => console.log(result));
+        .then((data) => {
+          for (let i = 0; i < data.length; i += 1) {
+            result.push(web3.utils.hexToAscii(data[i]));
+          }
+          setAllData(result);
+        });
     } catch (error) {
       console.log('Error when calling getAllWishes', error);
     }
-    // props.setShowAll(true);
+    setShowAll(true);
   };
   /**
  * After client inputs a string (bytes32), the onSubmit fn makes a call to
@@ -94,7 +100,7 @@ const Input = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const params = web3.utils.asciiToHex(wish).padEnd(66, '0');
+    const params = web3.utils.asciiToHex(wish);
     try {
       await contractInstance.methods.hashWish(params).send({
         from: account,
@@ -141,14 +147,14 @@ const Input = () => {
           <Image className="rocket" onClick={onSend} src={rocket} width={80} height={100} alt="rocket" />
         </motion.div>
       </OverlayTrigger>
-      <div role="button" tabIndex={0} onClick={() => getAll} onKeyUp={getAll}>
+      <div role="button" tabIndex={0} onClick={() => getAll()} onKeyUp={getAll}>
         <OverlayTrigger
           style={{ zIndex: '7', fontSize: '16px' }}
           placement="top"
           delay={{ show: 250, hide: 400 }}
           overlay={renderTooltipUsers}
         >
-          <FontAwesomeIcon id="icon" style={{ height: '4vh', width: 'auto', color: 'white' }} icon={faUsers} />
+          <FontAwesomeIcon id="icon" style={{ height: '4vh', width: 'auto', color: 'white' }} icon={faHistory} />
         </OverlayTrigger>
       </div>
     </div>

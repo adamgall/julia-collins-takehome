@@ -11,7 +11,7 @@ import InitialModal from '../components/InitialModal';
 const Home = (props) => {
   const [modal, setModal] = useState(true);
   const [showAll, setShowAll] = useState(false);
-  // const [allData, setAllData] = useState(null);
+  const [allData, setAllData] = useState(null);
 
   return (
     <div>
@@ -28,8 +28,11 @@ const Home = (props) => {
         show={modal}
         onHide={() => setModal(false)}
       />
-      {!showAll ? <Stars dbData={props.dbData} /> : <Stars dbData={props.allData} /> }
-      <Input setShowAll={setShowAll} />
+      {
+        showAll ? <Stars dbData={allData} showAll={showAll} />
+          : <Stars showAll={showAll} dbData={props.dbData} />
+    }
+      <Input setAllData={setAllData} setShowAll={setShowAll} />
       <div className="stars" />
       <div className="twinkling" />
       <div className="clouds" />
