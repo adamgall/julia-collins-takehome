@@ -11,16 +11,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import rocket from '../public/rocket.png';
 
-const Input = (props) => {
+const Input = () => {
   const [wish, setWish] = useState('');
   const [web3, setProvider] = useState(null);
   const [account, setAccounts] = useState(null);
   const [contractInstance, setContract] = useState(null);
-  const [allWishes, setAllData] = useState(null);
+  // const [allWishes, setAllData] = useState(null);
 
   /**
    * On hover of rocket, renders a string to the client indicating click functionality
-   * @param {props} props
    */
 
   const renderTooltip = (props) => (
@@ -42,9 +41,10 @@ const Input = (props) => {
 
   useEffect(async () => {
     let web3;
-
     if (window.ethereum) {
       web3 = new Web3(window.ethereum);
+    } else {
+      console.log('Consider downloading and using metamask!');
     }
     setProvider(web3);
     // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
@@ -141,7 +141,7 @@ const Input = (props) => {
           <Image className="rocket" onClick={onSend} src={rocket} width={80} height={100} alt="rocket" />
         </motion.div>
       </OverlayTrigger>
-      <div onClick={getAll}>
+      <div role="button" tabIndex={0} onClick={() => getAll} onKeyUp={getAll}>
         <OverlayTrigger
           style={{ zIndex: '7', fontSize: '16px' }}
           placement="top"

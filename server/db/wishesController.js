@@ -1,5 +1,8 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-shadow */
 const bcrypt = require('bcrypt');
-const WishHasher = require('./WishesModel.js');
+const WishHasher = require('./WishesModel');
+
 const SALT_WORK_FACTOR = 10;
 
 const db = {
@@ -20,7 +23,7 @@ const db = {
           newWish.save((err, data) => {
             if (err) throw err;
             else {
-              console.log('Wish saved to be hashed');
+              console.log('Wish saved to be hashed', data);
             }
           });
         }
@@ -48,7 +51,7 @@ const db = {
       if (err) throw err;
       else {
         res.locals.wishes = data;
-        console.log('got all wishes', data)
+        console.log('nEW, got all wishes from db', data);
       }
       next();
     });

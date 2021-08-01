@@ -1,8 +1,8 @@
-[] * update readme to simplify the dev setup process using project-specific truffle dependency (no need for external ganache) and `npx truffle develop`
+[X] * update readme to simplify the dev setup process using project-specific truffle dependency (no need for external ganache) and `npx truffle develop`
 
 [X] * make project fully local -- no hosted database
 
-[] * move _all_ environment-specific data to gitignored configuration files, so developer-specific data doesn't affect the repo
+[X] * move _all_ environment-specific data to gitignored configuration files, so developer-specific data doesn't affect the repo
 
 [X] * remove dual-backends -- either use strict client-side react (create react app) with express, or drop express and use next's server capabilities
 
@@ -20,4 +20,4 @@ Comments: All of the components are now functional components using hooks, my pr
 
 Comments: The reroute to the index.js page is only occuring after each time the input form is submitted (see the onSend function in the Input component). Sorry, should have made that more clear when we were going through the code. And agreed, every second would've definitely been hacky!
 
-[] * optional: for the sake of "additional complexity", add some state to the contract and include that state into the frontend
+[X] * optional: for the sake of "additional complexity", add some state to the contract and include that state into the frontend

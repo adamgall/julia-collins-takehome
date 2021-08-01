@@ -1,13 +1,13 @@
-/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const ModalData = (props) => {
+const ModalData = ({ starData, setShowData }) => {
   /**
    *  Component renders on initial rendering of application, using the setShowData hook
    */
   function onClick() {
-    props.setShowData(false);
+    setShowData(false);
   }
 
   return (
@@ -19,7 +19,7 @@ const ModalData = (props) => {
 
         <Modal.Body>
           <p>
-            {props.starData.wish}
+            {starData.wish}
             - Star Speak
           </p>
         </Modal.Body>

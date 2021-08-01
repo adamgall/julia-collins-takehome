@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
+// eslint rules above disabled so we can import the props to the initial modal correctly
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 

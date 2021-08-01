@@ -1,6 +1,6 @@
+/* eslint-disable no-shadow */
 const next = require('next');
 const express = require('express');
-const bodyParser = require('body-parser');
 const Web3 = require('web3');
 const db = require('./db/wishesController');
 
@@ -13,7 +13,6 @@ const dev = process.env.NODE_ENV !== 'production';
  */
 
 const app = next({ dev });
-const handle = app.getRequestHandler();
 
 /**
  * Connect to nextjs server, using the express framework
@@ -21,7 +20,10 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  server.use(bodyParser.json());
+  server.use(express.json());
+  server.use(express.urlencoded({
+    extended: true,
+  }));
 
   server.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
