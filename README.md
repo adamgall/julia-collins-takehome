@@ -67,7 +67,7 @@ Initial Setup Instructions:
 
 4. Get App Dependencies Setup
 
-  Cd into 'Decent' folder (terminal 1)
+  -Cd into 'Decent' folder (terminal 1)
   -This will run a local instance of truffle and provide a console we can use later to interact with our deployed contract and provided accounts
   
   ```
@@ -85,10 +85,9 @@ Initial Setup Instructions:
   npm run server
   ```
 
-  Open another terminal (terminal 3), start the client:
+  Open another terminal (terminal 3) to start client:
 
-  -Cd into src
-
+  -cd src
   ```
   npm i
   npm run build
