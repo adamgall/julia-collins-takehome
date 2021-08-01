@@ -1,29 +1,28 @@
-"use strict";
 const next = require('next');
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
 const Web3 = require('web3');
 const db = require('./db/wishesController');
 
 require('dotenv').config();
+
 const dev = process.env.NODE_ENV !== 'production';
 
 /**
  * Initial setup for nextjs server
  */
 
-const app = next({ dev: dev });
+const app = next({ dev });
 const handle = app.getRequestHandler();
-
 
 /**
  * Connect to nextjs server, using the express framework
  */
-app.prepare().then(function () {
+app.prepare().then(() => {
   const server = express();
 
-  server.use(bodyParser.json())
-  
+  server.use(bodyParser.json());
+
   server.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -35,11 +34,24 @@ app.prepare().then(function () {
 
   const contractAddress = process.env.CONTRACT_ADDRESS;
 
-/**
+  /**
  * Access contract abi via the build folder after compiling contract
  */
 
   const abi = [
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: false,
+          internalType: 'bytes32[]',
+          name: 'allWishes',
+          type: 'bytes32[]',
+        },
+      ],
+      name: 'AllWishes',
+      type: 'event',
+    },
     {
       anonymous: false,
       inputs: [],
@@ -60,7 +72,26 @@ app.prepare().then(function () {
       type: 'event',
     },
     {
-      constant: false,
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      name: 'allWishes',
+      outputs: [
+        {
+          internalType: 'bytes32',
+          name: '',
+          type: 'bytes32',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+      constant: true,
+    },
+    {
       inputs: [
         {
           internalType: 'bytes32',
@@ -70,18 +101,42 @@ app.prepare().then(function () {
       ],
       name: 'hashWish',
       outputs: [],
-      payable: false,
       stateMutability: 'nonpayable',
       type: 'function',
     },
     {
-      constant: false,
       inputs: [],
       name: 'drainWishes',
       outputs: [],
-      payable: false,
       stateMutability: 'nonpayable',
       type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'getWishes',
+      outputs: [
+        {
+          internalType: 'bytes32[]',
+          name: '_userWishes',
+          type: 'bytes32[]',
+        },
+      ],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'getMyWishes',
+      outputs: [
+        {
+          internalType: 'bytes32[]',
+          name: '_myWishes',
+          type: 'bytes32[]',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+      constant: true,
     },
   ];
 
@@ -125,6 +180,12 @@ app.prepare().then(function () {
     })
     .on('error', (event) => console.log('Error with event listener', event));
 
+  // contractInstance.events.AllWishes({})
+  //   .on('data', (event) => {
+  //     console.log('allWishes event logged', event);
+  //   })
+  //   .on('error', (event) => console.log('Error with event listener', event));
+
   server.get('/getWishes', db.getAllWishes, (req, res) => {
     res.status(200).send(res.locals.wishes);
   });
@@ -141,10 +202,8 @@ app.prepare().then(function () {
     return res.status(errorObj.status).send(errorObj.message.err);
   });
 
-  server.listen(3001, function (err) {
-    if (err)
-      throw err;
+  server.listen(3001, (err) => {
+    if (err) { throw err; }
     console.log('Ready on http://localhost:3001');
   });
 });
-

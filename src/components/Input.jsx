@@ -7,13 +7,16 @@ import {
 import Router from 'next/router';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import rocket from '../public/rocket.png';
 
-const Input = () => {
+const Input = (props) => {
   const [wish, setWish] = useState('');
   const [web3, setProvider] = useState(null);
   const [account, setAccounts] = useState(null);
   const [contractInstance, setContract] = useState(null);
+  const [allWishes, setAllData] = useState(null);
 
   /**
    * On hover of rocket, renders a string to the client indicating click functionality
@@ -26,6 +29,12 @@ const Input = () => {
     </Tooltip>
   );
 
+  const renderTooltipUsers = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Click to see every hashed wish to the bitverse.
+    </Tooltip>
+  );
+
   /**
    * On rendering of Input component, establishes connection with web3 provider,
    * gets reference to contract instance, and accesses an account used to make calls to contract
@@ -35,9 +44,8 @@ const Input = () => {
     let web3;
 
     if (window.ethereum) {
-      web3 = new Web3(window.web3.currentProvider);
+      web3 = new Web3(window.ethereum);
     }
-
     setProvider(web3);
     // const web3 = new Web3(new Web3.providers.WebsocketProvider(URL));
     const contract = new web3.eth.Contract(process.env.CONTRACT_ABI, process.env.CONTRACT_ADDRESS);
@@ -66,6 +74,17 @@ const Input = () => {
     }, 1000);
   };
 
+  const getAll = async () => {
+    try {
+      const allWishes = await contractInstance.methods.getWishes().call({
+        from: account,
+      })
+        .then((result) => console.log(result));
+    } catch (error) {
+      console.log('Error when calling getAllWishes', error);
+    }
+    // props.setShowAll(true);
+  };
   /**
  * After client inputs a string (bytes32), the onSubmit fn makes a call to
  * the contract's hashWish fn, emitting an event which the server will pick up.
@@ -122,6 +141,16 @@ const Input = () => {
           <Image className="rocket" onClick={onSend} src={rocket} width={80} height={100} alt="rocket" />
         </motion.div>
       </OverlayTrigger>
+      <div onClick={getAll}>
+        <OverlayTrigger
+          style={{ zIndex: '7', fontSize: '16px' }}
+          placement="top"
+          delay={{ show: 250, hide: 400 }}
+          overlay={renderTooltipUsers}
+        >
+          <FontAwesomeIcon id="icon" style={{ height: '4vh', width: 'auto', color: 'white' }} icon={faUsers} />
+        </OverlayTrigger>
+      </div>
     </div>
   );
 };

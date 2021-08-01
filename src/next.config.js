@@ -6,6 +6,19 @@ module.exports = {
     CONTRACT_ABI: [
       {
         anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            internalType: 'bytes32[]',
+            name: 'allWishes',
+            type: 'bytes32[]',
+          },
+        ],
+        name: 'AllWishes',
+        type: 'event',
+      },
+      {
+        anonymous: false,
         inputs: [],
         name: 'DrainWishes',
         type: 'event',
@@ -24,7 +37,26 @@ module.exports = {
         type: 'event',
       },
       {
-        constant: false,
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        name: 'allWishes',
+        outputs: [
+          {
+            internalType: 'bytes32',
+            name: '',
+            type: 'bytes32',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true,
+      },
+      {
         inputs: [
           {
             internalType: 'bytes32',
@@ -34,20 +66,44 @@ module.exports = {
         ],
         name: 'hashWish',
         outputs: [],
-        payable: false,
         stateMutability: 'nonpayable',
         type: 'function',
       },
       {
-        constant: false,
         inputs: [],
         name: 'drainWishes',
         outputs: [],
-        payable: false,
         stateMutability: 'nonpayable',
         type: 'function',
       },
+      {
+        inputs: [],
+        name: 'getWishes',
+        outputs: [
+          {
+            internalType: 'bytes32[]',
+            name: '_userWishes',
+            type: 'bytes32[]',
+          },
+        ],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'getMyWishes',
+        outputs: [
+          {
+            internalType: 'bytes32[]',
+            name: '_myWishes',
+            type: 'bytes32[]',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true,
+      },
     ],
-    CONTRACT_ADDRESS: '0xa2C7e76F10999862a00A8CC6FEA4b20261BD1d5F',
+    CONTRACT_ADDRESS: '0x96cEeC22670f9A006e7dbDeeAf63a2963c7Add93',
   },
 };
