@@ -1,12 +1,17 @@
 node_modules
 client/node_modules
 build
+todo.md
+
+# linting
+.eslintrc.json
 
 # next.js build output
 .next
 
-# dotenv environment variables file (build for Zeit Now)
+# dotenv environment variables file
 .env.build
+.env
 
 # Dependency directories
 node_modules/
