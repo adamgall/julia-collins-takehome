@@ -21,3 +21,10 @@ Comments: All of the components are now functional components using hooks, my pr
 Comments: The reroute to the index.js page is only occuring after each time the input form is submitted (see the onSend function in the Input component). Sorry, should have made that more clear when we were going through the code. And agreed, every second would've definitely been hacky!
 
 [X] * optional: for the sake of "additional complexity", add some state to the contract and include that state into the frontend
+
+Comments: For my own tinkering/ enjoyment and complexity's sake, I added a global storage variable (bytes32[] allWishes) and a function to access the array of wishes. 
+
+On the frontend, I've added functionality allowing users to click the #sun, displaying all wishes stored on the blockchain in their original form (unhashed). 
+
+The user can then toggle to the #moon, again hiding the blockchain storage and only rendering the hashed wishes that are locally held in mongodb.
+
