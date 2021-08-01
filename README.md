@@ -4,7 +4,7 @@ Initial Setup Instructions:
 
  1. Download MongoDB locally
 
-  -If homebrew is not yet installed, in your temrinal:
+  -If homebrew is not yet installed, in terminal:
 
   ```
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -62,7 +62,7 @@ Initial Setup Instructions:
   brew services run mongodb-community
   ```
 
-  If needing assistance on locally downloading mongo, more information can be found here:
+  If needing assistance on locally downloading mongodb, more information can be found here:
   https://zellwk.com/blog/install-mongodb/font%20awesome
 
 4. Get App Dependencies Setup
