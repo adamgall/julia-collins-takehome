@@ -8,15 +8,16 @@ import {
 import Router from 'next/router';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHistory } from '@fortawesome/free-solid-svg-icons';
 import rocket from '../public/rocket.png';
+import sun from '../public/sun.png';
+import moon from '../public/moon.png';
 
 const Input = ({ setAllData, setShowAll }) => {
   const [wish, setWish] = useState('');
   const [web3, setProvider] = useState(null);
   const [account, setAccounts] = useState(null);
   const [contractInstance, setContract] = useState(null);
+  const [hiddenScene, setScene] = useState(true);
 
   /**
    * On hover of rocket, renders a string to the client indicating click functionality
@@ -24,13 +25,18 @@ const Input = ({ setAllData, setShowAll }) => {
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Click to Empty the Sky, and Start Anew.
+      Empty the Sky, and Start Anew.
     </Tooltip>
   );
 
   const renderTooltipUsers = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Click to see all past wishes, unhashed.
+      Reveal all past wishes in the bitverse, unhashed.
+    </Tooltip>
+  );
+  const renderTooltipHide = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Reveal only hashed wishes.
     </Tooltip>
   );
 
@@ -74,6 +80,13 @@ const Input = ({ setAllData, setShowAll }) => {
     }, 1000);
   };
 
+  const showLimit = () => {
+    setShowAll(false);
+    setScene(true);
+    Router.push({
+      pathname: '/',
+    });
+  };
   const getAll = async () => {
     const result = [];
     try {
@@ -90,6 +103,10 @@ const Input = ({ setAllData, setShowAll }) => {
       console.log('Error when calling getAllWishes', error);
     }
     setShowAll(true);
+    setScene(false);
+    Router.push({
+      pathname: '/',
+    });
   };
   /**
  * After client inputs a string (bytes32), the onSubmit fn makes a call to
@@ -147,16 +164,31 @@ const Input = ({ setAllData, setShowAll }) => {
           <Image className="rocket" onClick={onSend} src={rocket} width={80} height={100} alt="rocket" />
         </motion.div>
       </OverlayTrigger>
-      <div role="button" tabIndex={0} onClick={() => getAll()} onKeyUp={getAll}>
-        <OverlayTrigger
-          style={{ zIndex: '7', fontSize: '16px' }}
-          placement="top"
-          delay={{ show: 250, hide: 400 }}
-          overlay={renderTooltipUsers}
-        >
-          <FontAwesomeIcon id="icon" style={{ height: '4vh', width: 'auto', color: 'white' }} icon={faHistory} />
-        </OverlayTrigger>
-      </div>
+      {hiddenScene
+        ? (
+          <div id="scene" role="button" tabIndex={0} onClick={() => getAll()} onKeyUp={getAll}>
+            <OverlayTrigger
+              style={{ zIndex: '7', fontSize: '16px' }}
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltipUsers}
+            >
+              <Image src={sun} width={70} height={70} />
+            </OverlayTrigger>
+          </div>
+        )
+        : (
+          <div id="scene" role="button" tabIndex={0} onClick={() => showLimit()} onKeyUp={getAll}>
+            <OverlayTrigger
+              style={{ zIndex: '7', fontSize: '16px' }}
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltipHide}
+            >
+              <Image src={moon} width={70} height={70} />
+            </OverlayTrigger>
+          </div>
+        )}
     </div>
   );
 };

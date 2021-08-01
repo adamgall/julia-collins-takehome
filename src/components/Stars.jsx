@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -15,15 +16,16 @@ const Stars = ({ dbData, showAll }) => {
  */
 
   function onClick(data) {
-    console.log(data);
     setData(data);
     setShowData(true);
   }
 
   const starArr = [];
-  for (let i = 0; i < dbData.length; i += 1) {
-    starArr.push(<Image onClick={() => onClick(dbData[i])} key={i} id="star-child" width={50} height={50} src={star} />);
-  }
+  dbData.map((el, i) => {
+    // eslint-disable-next-line react/no-array-index-key
+    starArr.push(<Image onClick={() => onClick(el)} key={i} id="star-child" width={50} height={50} src={star} />);
+  });
+
   return (
     <div className="star-container">
       {starArr}
