@@ -99,4 +99,3 @@ Initial Setup Instructions:
   -Fill out the network name (truffle)
   -Paste the network you copied from the truffle console into the New RPC URL input
   -If metamask requires a Chain Id, go into truffle console and enter in 'web3.eth.chainId()'
-
