@@ -79,7 +79,10 @@ const Input = ({ setAllData, setShowAll }) => {
       });
     }, 1000);
   };
-
+  /**
+ *When client clicks on #moon, fn hides the stars called previously from storage on the blockchain,
+ and instead shows only those that are held locally in the database
+ */
   const showLimit = () => {
     setShowAll(false);
     setScene(true);
@@ -87,6 +90,13 @@ const Input = ({ setAllData, setShowAll }) => {
       pathname: '/',
     });
   };
+  /**
+ *When client clicks on #sun, fn makes a call to the deployed smart contract,
+ getting all wishes that have been stored on the blockchain, converts
+ them from bytes32 into a string, and then executes logic
+ (using hooks) to render all the data
+ */
+
   const getAll = async () => {
     const result = [];
     try {
@@ -166,7 +176,15 @@ const Input = ({ setAllData, setShowAll }) => {
       </OverlayTrigger>
       {hiddenScene
         ? (
-          <div id="scene" role="button" tabIndex={0} onClick={() => getAll()} onKeyUp={getAll}>
+          <motion.div
+            animate={{ y: -30, rotate: 360 }}
+            transition={{ type: 'spring', stiffness: 13 }}
+            id="scene"
+            role="button"
+            tabIndex={0}
+            onClick={() => getAll()}
+            onKeyUp={getAll}
+          >
             <OverlayTrigger
               style={{ zIndex: '7', fontSize: '16px' }}
               placement="top"
@@ -175,10 +193,18 @@ const Input = ({ setAllData, setShowAll }) => {
             >
               <Image src={sun} width={70} height={70} />
             </OverlayTrigger>
-          </div>
+          </motion.div>
         )
         : (
-          <div id="scene" role="button" tabIndex={0} onClick={() => showLimit()} onKeyUp={getAll}>
+          <motion.div
+            animate={{ y: -30, rotate: 360 }}
+            transition={{ type: 'spring', stiffness: 13 }}
+            id="scene"
+            role="button"
+            tabIndex={0}
+            onClick={() => showLimit()}
+            onKeyUp={getAll}
+          >
             <OverlayTrigger
               style={{ zIndex: '7', fontSize: '16px' }}
               placement="top"
@@ -187,7 +213,7 @@ const Input = ({ setAllData, setShowAll }) => {
             >
               <Image src={moon} width={70} height={70} />
             </OverlayTrigger>
-          </div>
+          </motion.div>
         )}
     </div>
   );
