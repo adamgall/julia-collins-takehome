@@ -98,8 +98,13 @@ Initial Setup Instructions:
 5. Setup Metamask, if not already installed
 
 -Download metamask chrome extension
+
 -From the truffle console, copy the local network being used e.g. http://localhost:9545
+
 -Open metamask networks (Ethereum Mainnet, Ropsten, etc), and click 'Custom RPC'
-  -Fill out the network name (truffle)
-  -Paste the network you copied from the truffle console into the New RPC URL input
-  -If metamask requires a Chain Id, go into truffle console and enter in 'web3.eth.chainId()'
+
+ -Fill out the network name (truffle)
+  
+ -Paste the network you copied from the truffle console into the New RPC URL input
+  
+ -If metamask requires a Chain Id, go into truffle console and enter in 'web3.eth.chainId()'
