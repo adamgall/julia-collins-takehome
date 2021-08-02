@@ -18,7 +18,7 @@ Comments: All of the components are now functional components using hooks, my pr
 
 [X] * revist the current pattern of pushing the root route every second to reload data... that seems hacky and won't scale if the app has multiple pages
 
-Comments: The reroute to the index.js page is only occuring after each time the input form is submitted (see the onSend function in the Input component). Sorry, should have made that more clear when we were going through the code. And agreed, every second would've definitely been hacky!
+Comments: The reroute to the index.js page is only occurring after each time the input form is submitted (see the onSend function in the Input component). Sorry, should have made that more clear when we were going through the code. I can get hacky, but I promise I won't ever get that hacky!
 
 [X] * optional: for the sake of "additional complexity", add some state to the contract and include that state into the frontend
 
