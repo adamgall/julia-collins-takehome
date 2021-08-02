@@ -107,4 +107,4 @@ Initial Setup Instructions:
   
  -Paste the network you copied from the truffle console into the New RPC URL input
   
- -If metamask requires a Chain Id, go into truffle console and enter in 'web3.eth.chainId()'
+ -If metamask requires a Chain Id, go into the truffle console and enter in 'web3.eth.chainId()'

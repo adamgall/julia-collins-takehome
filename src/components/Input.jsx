@@ -137,7 +137,12 @@ const Input = ({ setAllData, setShowAll }) => {
     }
 
     setWish('');
-    // setTimeout and reroute to index.js so getInitialProps can update state of stars
+
+    /**
+   * setTimeout to reroute to index.js after one second. GetIntialProps
+   * will update the new state of star data
+   * @param {*} e
+   */
     setTimeout(() => {
       Router.push({
         pathname: '/',
